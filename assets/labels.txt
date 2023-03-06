@@ -1,0 +1,4 @@
+0 Unfortunately, MidDemented
+1 Unfortunately, ModerateDemented
+2 congratulation, NonDemented
+3 Unfortunately, VeryMidDemented
