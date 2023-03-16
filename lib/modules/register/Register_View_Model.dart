@@ -7,7 +7,6 @@ import 'RegisterNavigetor.dart';
 
 class RgisterViewModel extends BaseViewModel<RegisterNavigetor> {
   String? massage;
-
   void createAcount({
     required String fName,
     required String email,

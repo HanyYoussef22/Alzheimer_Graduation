@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../shard/shared/components.dart';
@@ -93,28 +94,29 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 borderRadius: BorderRadius.circular(12),
                               ))),
                       onPressed: () {
+                        RestPass();
                         print('test');
                         AwesomeDialog(
-                            btnOkColor: Colors.indigoAccent,
-                            context: context,
-                            dialogType: DialogType.success,
-                            borderSide: const BorderSide(
-                              color: Colors.green,
-                              width: 2,
-                            ),
-                            width: 590,
-                            buttonsBorderRadius: const BorderRadius.all(
-                              Radius.circular(2),
-                            ),
-                            dismissOnTouchOutside: true,
-                            dismissOnBackKeyPress: false,
-                            buttonsTextStyle: TextStyle(fontSize: 17),
-                            headerAnimationLoop: false,
-                            animType: AnimType.bottomSlide,
-                            title: 'Sent Successfully',
-                            titleTextStyle: const TextStyle(
-                              fontSize: 17,
-                              fontFamily: 'oxygen',
+                                btnOkColor: Colors.indigoAccent,
+                                context: context,
+                                dialogType: DialogType.success,
+                                borderSide: const BorderSide(
+                                  color: Colors.green,
+                                  width: 2,
+                                ),
+                                width: 590,
+                                buttonsBorderRadius: const BorderRadius.all(
+                                  Radius.circular(2),
+                                ),
+                                dismissOnTouchOutside: true,
+                                dismissOnBackKeyPress: false,
+                                buttonsTextStyle: TextStyle(fontSize: 17),
+                                headerAnimationLoop: false,
+                                animType: AnimType.bottomSlide,
+                                title: 'Sent Successfully',
+                                titleTextStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontFamily: 'oxygen',
                               fontWeight: FontWeight.w700,
                             ),
                             descTextStyle:
@@ -150,5 +152,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-
+  void RestPass() {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+  }
 }
