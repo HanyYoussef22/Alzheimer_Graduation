@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631740784399",
+    "project_id": "alzahimer-ac621",
+    "storage_bucket": "alzahimer-ac621.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631740784399:android:bef115bb1c29e91009287a",
+        "android_client_info": {
+          "package_name": "com.example.alzahimer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631740784399-4a1h46hf3vhlij9k1u71u58c6nhfletk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX3htG9YyN27cBF_JIDpqRyejtLMyNgNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631740784399-4a1h46hf3vhlij9k1u71u58c6nhfletk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

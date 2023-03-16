@@ -1,10 +1,8 @@
-import 'package:alzahimer/modules/setting/show_theme-bottom-sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../shard/styles/clors.dart';
-import '../../shard/providers/app_provider.dart';
-import 'show_language_bottomSheet.dart';
+import '../../shard/Provider/app_provider.dart';
 
 class SettingScreen extends StatefulWidget {
   @override
@@ -26,7 +24,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           InkWell(
             onTap: () {
-              showLanguageBottomSheet();
+              // showLanguageBottomSheet();
             },
             child: Text(
               'Language',
@@ -42,7 +40,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           InkWell(
             onTap: () {
-              showLanguageBottomSheet();
+              // showLanguageBottomSheet();
             },
             child: Container(
               padding: const EdgeInsets.all(12),
@@ -77,7 +75,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           InkWell(
             onTap: () {
-              showThemeBottomSheet();
+              // showThemeBottomSheet();
             },
             child: Container(
               padding: EdgeInsets.all(12),
@@ -101,19 +99,19 @@ class _SettingScreenState extends State<SettingScreen> {
     ));
   }
 
-  void showThemeBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return ShowThemeBottomSheet();
-        });
-  }
+// void showThemeBottomSheet() {
+//   showModalBottomSheet(
+//       context: context,
+//       builder: (context) {
+//         // return ShowThemeBottomSheet();
+//       });
+// }
 
-  void showLanguageBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return ShowLanguageBottomSheet();
-        });
-  }
+// void showLanguageBottomSheet() {
+//   showModalBottomSheet(
+//       context: context,
+//       // builder: (context) {
+//         // return ShowLanguageBottomSheet();
+//       });
+// }
 }

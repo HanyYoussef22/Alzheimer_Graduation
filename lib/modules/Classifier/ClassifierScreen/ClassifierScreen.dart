@@ -5,13 +5,11 @@ import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierNavigetor.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierViewModel.dart';
 import 'package:alzahimer/shard/components/components.dart';
-import 'package:alzahimer/shard/providers/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:tflite/tflite.dart';
 
@@ -58,7 +56,6 @@ class _ClassifierScreenState
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppProvider>(context);
 
     return Screenshot(
       controller: controllerr,

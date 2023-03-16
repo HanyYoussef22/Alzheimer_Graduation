@@ -114,3 +114,38 @@ Widget defaultTextField({
     },
   );
 }
+
+defaultTextFormField({
+  VoidCallback? onPressed,
+  TextInputType? keyboardType,
+  required String? hintText,
+  required String? Function(String?) validate,
+  required TextEditingController? Controller,
+  IconButton? prefixIcon,
+  double? circular,
+  Color? Colorfill,
+  bool obscureText = false,
+}) {
+  return TextFormField(
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    controller: Controller,
+    onTap: onPressed,
+    validator: validate,
+    decoration: InputDecoration(
+      prefixIcon: prefixIcon,
+      filled: true,
+      fillColor: Colorfill ?? Colors.white,
+      hintText: hintText,
+      hintStyle: const TextStyle(
+        color: Colors.grey,
+        fontFamily: 'oxygen',
+        // fontWeight: FontWeight.w600,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circular ?? 0),
+        borderSide: BorderSide(color: Colors.blue),
+      ),
+    ),
+  );
+}

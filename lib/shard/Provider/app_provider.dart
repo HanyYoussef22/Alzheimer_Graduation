@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class AppProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
 
@@ -13,12 +12,6 @@ class AppProvider extends ChangeNotifier {
   void ChangeAppLanguage(String LanguageCode) {
     AppLanguage = LanguageCode;
     notifyListeners();
-  }
-
-  String changeMainBackground() {
-    return themeMode == ThemeMode.light
-        ? 'asstes/images/main_background.png'
-        : 'asstes/images/background_dark.png';
   }
 }
 // class AppProvider11 extends ChangeNotifier {
@@ -35,3 +28,9 @@ class AppProvider extends ChangeNotifier {
 //     notifyListeners();
 //   }
 //
+//   String changeMainBackground() {
+//     return themeMode == ThemeMode.light
+//         ? 'asstes/images/main_background.png'
+//         : 'asstes/images/background_dark.png';
+//   }
+// }

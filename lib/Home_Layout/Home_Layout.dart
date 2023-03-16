@@ -1,11 +1,11 @@
 import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_Navigetor.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_ViewModel.dart';
-import 'package:alzahimer/modules/test.dart';
+import 'package:alzahimer/modules/register/register_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
-import '../modules/setting/SettingScreen.dart';
+import '../modules/login/login_screen.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String roudeName = 'HomeLayout';
@@ -18,7 +18,7 @@ class HomeLayout extends StatefulWidget {
 class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
     implements HomeLayoutNavigetor {
   int currentIndex = 1;
-  List<Widget> taps = [TestScreen(), ClassifierScreen(), SettingScreen()];
+  List<Widget> taps = [LoginScreen(), ClassifierScreen(), RegisterScreen()];
 
   @override
   HomeLayoutViewModel iniViewModel() {
@@ -27,7 +27,6 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     viewModel.navigetor = this;
   }
