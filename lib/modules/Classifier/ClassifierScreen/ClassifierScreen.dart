@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierNavigetor.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierViewModel.dart';
@@ -63,7 +62,7 @@ class _ClassifierScreenState
         body: _loading
             ? Container(
                 alignment: Alignment.center,
-                child: const CircularProgressIndicator(),
+          child: Lottie.asset('assets/1.json'),
               )
             : Container(
                 alignment: Alignment.center,
@@ -82,7 +81,7 @@ class _ClassifierScreenState
                                     child: Lottie.asset('assets/3.json'),
                                   ),
                                   Text(
-                                    'Uplode Image',
+                                    'Uploude Image',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
@@ -119,7 +118,39 @@ class _ClassifierScreenState
                                     ),
                                   )
                                 ])
-                          : result1(_image!, _outputs),
+                          : Container(
+                              color: Colors.transparent,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    height: 50,
+                                  ),
+                                  Image.file(_image!),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  _outputs == null
+                                      ? Container()
+                                      : Positioned(
+                                          bottom: 20,
+                                          right: 50,
+                                          child: Text(
+                                            "${_outputs![0]["label"]}",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18.0,
+                                              background: Paint()
+                                                ..color = Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                  const SizedBox(
+                                    height: 30,
+                                  )
+                                ],
+                              ),
+                            ),
                       _image == null
                           ? Container()
                           : Padding(
@@ -181,7 +212,8 @@ class _ClassifierScreenState
       _loading = true;
       _image = selectedImage = File(image.path);
     });
-    classifyImage(File(image.path));
+    Future.delayed(const Duration(seconds: 0)).then((value) =>
+        classifyImage(File(image.path)));
   }
 
   // to get image from gallery
@@ -208,6 +240,7 @@ class _ClassifierScreenState
       _loading = false;
       _outputs = output!;
     });
+
   } // to classify the image and return the output
 
   loadModel() async {
@@ -222,4 +255,13 @@ class _ClassifierScreenState
     Tflite.close();
     super.dispose();
   }
+
+
+  void showScreenAndAwait() async {
+    await Future.delayed(const Duration(seconds: 20));
+    Lottie.asset('assets/1.json');
+
+    print('2 seconds have passed!');
+  }
+
 }

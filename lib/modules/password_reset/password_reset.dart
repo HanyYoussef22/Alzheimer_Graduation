@@ -15,11 +15,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   emailController;
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    emailController;
+  }
 
   @override
   Widget build(BuildContext context) {
