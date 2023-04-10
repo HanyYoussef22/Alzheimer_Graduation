@@ -1,4 +1,3 @@
-0 Unfortunately, MidDemented
-1 Unfortunately, ModerateDemented
-2 congratulation, NonDemented
-3 Unfortunately, VeryMidDemented
+0 Unfortunately, Alzheimer Disease
+1 Unfortunately, Cognitively Impaired
+2 congratulation,Cognitively Normal

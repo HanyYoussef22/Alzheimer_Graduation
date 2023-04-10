@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierNavigetor.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierViewModel.dart';
@@ -62,7 +63,7 @@ class _ClassifierScreenState
         body: _loading
             ? Container(
                 alignment: Alignment.center,
-          child: Lottie.asset('assets/1.json'),
+                child: Lottie.asset('assets/1.json'),
               )
             : Container(
                 alignment: Alignment.center,
@@ -212,8 +213,8 @@ class _ClassifierScreenState
       _loading = true;
       _image = selectedImage = File(image.path);
     });
-    Future.delayed(const Duration(seconds: 0)).then((value) =>
-        classifyImage(File(image.path)));
+    Future.delayed(const Duration(seconds: 0))
+        .then((value) => classifyImage(File(image.path)));
   }
 
   // to get image from gallery
