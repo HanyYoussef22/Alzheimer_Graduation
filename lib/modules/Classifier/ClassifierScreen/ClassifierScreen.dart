@@ -133,18 +133,27 @@ class _ClassifierScreenState
                                   ),
                                   _outputs == null
                                       ? Container()
-                                      : Positioned(
-                                          bottom: 20,
-                                          right: 50,
-                                          child: Text(
-                                            "${_outputs![0]["label"]}",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18.0,
-                                              background: Paint()
-                                                ..color = Colors.transparent,
+                                      : Column(
+                                          children: [
+                                            Text(
+                                              "${_outputs![0]["label"]}",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18.0,
+                                                background: Paint()
+                                                  ..color = Colors.transparent,
+                                              ),
                                             ),
-                                          ),
+                                            Text(
+                                              "${_outputs![0]["confidence"] * 100} %",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18.0,
+                                                background: Paint()
+                                                  ..color = Colors.transparent,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                   const SizedBox(
                                     height: 30,
