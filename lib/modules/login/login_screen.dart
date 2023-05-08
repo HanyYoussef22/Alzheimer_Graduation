@@ -3,6 +3,7 @@ import 'package:alzahimer/Home_Layout/Home_Layout.dart';
 import 'package:alzahimer/Models/My_User.dart';
 import 'package:alzahimer/modules/login/LoginNavigetor.dart';
 import 'package:alzahimer/modules/login/LoginViewModel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,8 @@ class _LoginScreenState extends BaseState<LoginScreen, LoginViewModel>
   void GoToHomeFromLogin(MyUser user) {
     Navigator.pushReplacementNamed(context, HomeLayout.roudeName);
     var provider = Provider.of<UserProvider>(context, listen: false);
+    User? FirebaseUser = FirebaseAuth.instance.currentUser;
+    provider.firebaseUser = FirebaseUser;
     provider.user = user;
     // Navigator.pushReplacementNamed(context, HomeLayout.roudeName);
     print('Login is Successfully');
