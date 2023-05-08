@@ -1,10 +1,17 @@
+import 'dart:typed_data';
+import 'dart:ui';
 import 'dart:io';
+import 'dart:ui' as ui;
+import 'package:image/image.dart' as img; // added import for ImageByteFormat
 import 'dart:typed_data';
 
 import 'package:alzahimer/Base.dart';
+import 'package:alzahimer/Models/My_User.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierNavigetor.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierViewModel.dart';
 import 'package:alzahimer/shard/components/components.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,8 +20,12 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:tflite/tflite.dart';
 
+import 'package:path_provider/path_provider.dart';
 import '../../../shard/styles/clors.dart';
 import '../ResuiltScreen/ResultScreen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'loadingScreen/Loading.dart';
 
 class ClassifierScreen extends StatefulWidget {
   static const String roudeName = '/';
@@ -56,15 +67,11 @@ class _ClassifierScreenState
 
   @override
   Widget build(BuildContext context) {
-
     return Screenshot(
       controller: controllerr,
       child: Scaffold(
         body: _loading
-            ? Container(
-                alignment: Alignment.center,
-                child: Lottie.asset('assets/1.json'),
-              )
+            ? Loading()
             : Container(
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width,
@@ -76,39 +83,39 @@ class _ClassifierScreenState
                     children: [
                       _image == null
                           ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                  Container(
-                                    child: Lottie.asset('assets/3.json'),
-                                  ),
-                                  Text(
-                                    'Uploude Image',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      pickImage();
-                                    },
-                                    child: Container(
-                                      width: 300,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: PrimaryColor),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.upload_file,
-                                            color: WhiteColor,
-                                          ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Lottie.asset('assets/3.json'),
+                      ),
+                      Text(
+                        'Uploude Image',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          pickImage();
+                        },
+                        child: Container(
+                          width: 300,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(20),
+                              color: PrimaryColor),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.upload_file,
+                                color: WhiteColor,
+                              ),
                                           Text('Uploude Image',
                                               style: TextStyle(
                                                   fontSize: 17,
@@ -119,48 +126,8 @@ class _ClassifierScreenState
                                     ),
                                   )
                                 ])
-                          : Container(
-                              color: Colors.transparent,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    height: 50,
-                                  ),
-                                  Image.file(_image!),
-                                  const SizedBox(
-                                    height: 30,
-                                  ),
-                                  _outputs == null
-                                      ? Container()
-                                      : Column(
-                                          children: [
-                                            Text(
-                                              "${_outputs![0]["label"]}",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                background: Paint()
-                                                  ..color = Colors.transparent,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${_outputs![0]["confidence"] * 100} %",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18.0,
-                                                background: Paint()
-                                                  ..color = Colors.transparent,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                  const SizedBox(
-                                    height: 30,
-                                  )
-                                ],
-                              ),
-                            ),
+                          : result1(_image!, _outputs),
+
                       _image == null
                           ? Container()
                           : Padding(
@@ -171,46 +138,48 @@ class _ClassifierScreenState
                                 text: 'save result to the Gallery',
                                 onPressed: () async {
                                   final imageee =
-                                      await controllerr.captureFromWidget(
-                                          result1(_image!, _outputs));
-                                  if (imageee == null) return;
-                                  await save(imageee);
-                                },
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _image == null
-                          ? Container()
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: defaultButton(
-                                btnColor: PrimaryColor,
-                                radius: 15,
-                                text: 'save result to the Cloud',
-                                onPressed: () async {
-                                  final imageee =
-                                      await controllerr.captureFromWidget(
-                                          result1(_image!, _outputs));
-                                  if (imageee == null) return;
-                                  await save(imageee);
-                                },
-                              ),
-                            ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _image == null
-                          ? Container()
-                          : const Text(
-                              ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
-                              style: TextStyle(color: Colors.red, fontSize: 20),
-                            ),
-                    ],
+                      await controllerr.captureFromWidget(
+                          result1(_image!, _outputs));
+                      if (imageee == null) return;
+                      await save(imageee);
+                    },
                   ),
                 ),
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
+                _image == null
+                    ? Container()
+                    : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: defaultButton(
+                    btnColor: PrimaryColor,
+                    radius: 15,
+                    text: 'save result to the Cloud',
+                    onPressed: () async {
+                      final imageee =
+                                      await controllerr.captureFromWidget(
+                                          result1(_image!, _outputs));
+                                  if (imageee == null) return;
+                                  // await save(imageee);
+
+                                  await uploadImage(imageee);
+                                },
+                              ),
+                            ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // _image == null
+                      //     ? Container()
+                      //     : const Text(
+                      //   ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
+                      //   style: TextStyle(color: Colors.red, fontSize: 20),
+                      // ),
+                    ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -222,7 +191,7 @@ class _ClassifierScreenState
       _loading = true;
       _image = selectedImage = File(image.path);
     });
-    Future.delayed(const Duration(seconds: 0))
+    Future.delayed(const Duration(seconds: 5))
         .then((value) => classifyImage(File(image.path)));
   }
 
@@ -250,7 +219,6 @@ class _ClassifierScreenState
       _loading = false;
       _outputs = output!;
     });
-
   } // to classify the image and return the output
 
   loadModel() async {
@@ -266,7 +234,6 @@ class _ClassifierScreenState
     super.dispose();
   }
 
-
   void showScreenAndAwait() async {
     await Future.delayed(const Duration(seconds: 20));
     Lottie.asset('assets/1.json');
@@ -274,4 +241,63 @@ class _ClassifierScreenState
     print('2 seconds have passed!');
   }
 
+  Future<void> uploadImage(Uint8List imageBytes) async {
+    final user = FirebaseAuth.instance.currentUser;
+    final id = user!.uid;
+
+    // Create a unique file name based on the current timestamp
+    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final fileName = '$id-$timestamp.png';
+
+    // Convert the Uint8List to an Image
+    final image = await decodeImageFromList(imageBytes);
+
+    // Create a new file in temporary directory and write the image bytes to it
+    final tempDir = await getTemporaryDirectory();
+    final file = await new File('${tempDir.path}/$fileName').create();
+    final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+    await file.writeAsBytes(bytes!.buffer.asUint8List());
+
+    // Upload the file to Firebase Storage
+    final ref = FirebaseStorage.instance.ref('$id/$fileName');
+    await ref.putFile(file);
+
+    // Get the download URL and update the user's profile
+    final url = await ref.getDownloadURL();
+    await FirebaseFirestore.instance
+        .collection(MyUser.CollecationName)
+        .doc(id)
+        .update({
+      'listimageurl': FieldValue.arrayUnion([url]),
+    });
+  }
+
+// uploudeimage(){
+//   // var ref= FirebaseFirestore.instance.ref('images/');
+//
+// }
+
+// Future<void> uploadImage(Uint8List imageBytes) async {
+//   final user = FirebaseAuth.instance.currentUser;
+//   final id = user!.uid;
+//
+//   // Convert the Uint8List to an Image
+//   final image = await decodeImageFromList(imageBytes);
+//
+//   // Create a new file in temporary directory and write the image bytes to it
+//   final tempDir = await getTemporaryDirectory();
+//   final file = await new File('${tempDir.path}/$id.png').create();
+//   final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+//   await file.writeAsBytes(bytes!.buffer.asUint8List());
+//
+//   // Upload the file to Firebase Storage
+//   final ref = FirebaseStorage.instance.ref('userImages/$id.png');
+//   await ref.putFile(file);
+//
+//   // Get the download URL and update the user's profile
+//   final url = await ref.getDownloadURL();
+//   await FirebaseFirestore.instance.collection(MyUser.CollecationName).doc(id).update({
+//     'imageurl': url,
+//   });
+// }
 }

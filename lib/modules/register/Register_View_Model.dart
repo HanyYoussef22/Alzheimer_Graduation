@@ -20,8 +20,11 @@ class RgisterViewModel extends BaseViewModel<RegisterNavigetor> {
         email: email,
         password: password,
       );
-      MyUser user =
-          MyUser(id: credential.user!.uid, fName: fName, email: email);
+      MyUser user = MyUser(
+          id: credential.user!.uid,
+          fName: fName,
+          email: email,
+          listimageurl: []);
       var userCreated = DataBaseUtil.creatDBforUser(user);
       var User = await DataBaseUtil.readUser(credential.user?.uid ?? "");
       // navigetor.showLoading(IsDissmassable: false);

@@ -1,4 +1,5 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
+import 'package:alzahimer/modules/Classifier/hoistry/hoistry.dart';
 import 'package:alzahimer/shard/Provider/app_provider.dart';
 import 'package:alzahimer/shard/Provider/user_Provider.dart';
 import 'package:alzahimer/shard/styles/My_Themes.dart';
@@ -8,6 +9,9 @@ import 'package:provider/provider.dart';
 
 import 'modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
 import 'modules/login/login_screen.dart';
+import 'modules/profile/change_PassWored.dart';
+import 'modules/profile/change_name.dart';
+import 'modules/profile/profile_Screen.dart';
 
 // ChangeNotifierProvider<AppProvider>(create: (c) => AppProvider()
 void main() async {
@@ -33,7 +37,11 @@ class MyApp extends StatelessWidget {
       routes: {
         ClassifierScreen.roudeName: (c) => ClassifierScreen(),
         HomeLayout.roudeName: (c) => HomeLayout(),
-        LoginScreen.roudeName: (c) => LoginScreen()
+        LoginScreen.roudeName: (c) => LoginScreen(),
+        ChangePassword.RoudeName: (c) => ChangePassword(),
+        ChangeName.RoudeName: (c) => ChangeName(),
+        ProfileScreen.RoudeName: (c) => ProfileScreen(),
+        ShowHistory.RouteName: (c) => ShowHistory(),
       },
       debugShowCheckedModeBanner: false,
       theme: MyThemeData.lightTheme,

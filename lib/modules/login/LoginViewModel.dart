@@ -10,11 +10,9 @@ class LoginViewModel extends BaseViewModel<LoginNavigetor> {
   Future<void> LoginInEmail(
       {required String emailAddress, required String password}) async {
     try {
-      print('Login');
       navigetor.showLoading(IsDissmassable: false);
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
-      print('Login is Successfully1');
       navigetor.hidMassage();
       var user = await DataBaseUtil.readUser(credential.user?.uid ?? "");
       navigetor.GoToHomeFromLogin(user);
