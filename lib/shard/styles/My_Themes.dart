@@ -4,15 +4,18 @@ import 'clors.dart';
 
 class MyThemeData {
   static final ThemeData lightTheme = ThemeData(
+    fontFamily: 'Poppins',
     primaryColor: PrimaryColor,
+    primarySwatch: Colors.purple,
     scaffoldBackgroundColor: mainBackgroundColor,
     colorScheme: ColorScheme(
-      primary: PrimaryColor,
+      primary: Colors.purple,
       onPrimary: Colors.white,
       secondary: GreenColor,
       onSecondary: Colors.white,
       error: Colors.red,
       onError: Colors.white,
+
       onSurface: Colors.grey,
       surface: Colors.white,
       onBackground: Colors.white,
@@ -40,10 +43,11 @@ class MyThemeData {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primaryColor: SecendColor,
+    primaryColor: Colors.purple,
+    primarySwatch: Colors.purple,
     scaffoldBackgroundColor: mainBackgroundColor,
     colorScheme: ColorScheme(
-      primary: SecendColor,
+      primary: Colors.purple,
       onPrimary: Colors.white,
       secondary: GreenColor,
       onSecondary: Colors.white,

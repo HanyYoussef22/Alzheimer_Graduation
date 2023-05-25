@@ -34,9 +34,12 @@ class ResultScreen extends StatelessWidget {
                   // height: height*0.1,
                   child: Text(
                     "${_outputs![0]["label"]},",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.red,
                       fontSize: 18.0,
+
+
                       background: Paint()..color = Colors.transparent,
                     ),
                   ),
