@@ -2,12 +2,20 @@ import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_Navigetor.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_ViewModel.dart';
 import 'package:alzahimer/Home_Layout/test.dart';
+import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icon_broken/icon_broken.dart';
 
+import '../article_screen/articles/articles_screen.dart';
+// import '../home.dart';
 import '../modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
 import '../modules/Classifier/hoistry/hoistry.dart';
-import '../modules/login/login_screen.dart';
 import '../modules/profile/profile_Screen.dart';
+import '../profile/profile_screen.dart';
+import 'layout_cubit.dart';
+import 'layout_states.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String roudeName = 'HomeLayout';
@@ -22,10 +30,16 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
   int currentIndex = 0;
   List<Widget> taps = [
     ClassifierScreen(),
-    LoginScreen(),
-    ProfileScreen(),
+    ArticleScreen(),
+    ClassifierScreen(),
     ShowHistory(),
-    ScanScreen()
+    Profile(),
+  ]; List<String> titles = [
+    'Home',
+    'Blogs',
+    'Classify',
+    'History',
+    'Profile',
   ];
 
   @override
@@ -38,33 +52,192 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
     super.initState();
     viewModel.navigetor = this;
   }
-
+  Widget currentPage = ClassifierScreen();
+  final PageStorageBucket bucket = PageStorageBucket();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   title: Text('Welcome', style: Theme.of(context).textTheme.bodyMedium),
-      //   elevation: 0,
-      // ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          currentIndex = index;
-          setState(() {});
-        },
-        currentIndex: currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "",
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
+    return BlocConsumer<LayoutCubit,LayoutStates>(
+      builder: (context,state){
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(titles[currentIndex], style: TextStyle(color: BlocProvider.of<ThemeCubit>(context).state?Colors.purple:Colors.grey,
+                fontFamily: 'Poppins',
+                fontSize: 20
+            ),),
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit_sharp), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit_sharp), label: "")
-        ],
-      ),
-      body: taps[currentIndex],
+          body: PageStorage(
+            bucket: bucket,
+            child: currentPage,
+          ),
+          bottomNavigationBar: BottomAppBar(
+            color: BlocProvider.of<ThemeCubit>(context).state ? Color(0xFF141922):Colors.white,
+            shape: const CircularNotchedRectangle(),
+            elevation: 10,
+            notchMargin: 8,
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(
+                                () {
+                              currentPage = ClassifierScreen();
+                              currentIndex = 0;
+                            },
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconBroken.Home,
+                              color:
+                              currentIndex == 0 ? Colors.purple : Colors.grey,
+                              size: 22,
+                            ),
+                            Text(
+                              'Home',
+                              style: TextStyle(
+                                color:
+                                currentIndex == 0 ? Colors.purple : Colors.grey,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(
+                                () {
+                              currentPage = ArticleScreen();
+                              currentIndex = 1;
+                            },
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconBroken.Document,
+                              color:
+                              currentIndex == 1 ? Colors.purple : Colors.grey,
+                              size: 22,
+                            ),
+                            Text(
+                              'Blogs',
+                              style: TextStyle(
+                                  color: currentIndex == 1
+                                      ? Colors.purple
+                                      : Colors.grey,
+                                  fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(
+                                () {
+                              currentPage =   ShowHistory();
+                              currentIndex = 3;
+                            },
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconBroken.Document,
+                              color:
+                              currentIndex == 3 ? Colors.purple : Colors.grey,
+                              size: 22,
+                            ),
+                            Text(
+                              'History',
+                              style: TextStyle(
+                                color:
+                                currentIndex == 3 ? Colors.purple : Colors.grey,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(
+                                () {
+                              currentPage = const Profile();
+                              currentIndex = 4;
+                            },
+                          );
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              IconBroken.Profile,
+                              color:
+                              currentIndex == 4 ? Colors.purple : Colors.grey,
+                              size: currentIndex == 4 ? 24 : 22,
+                            ),
+                            Text(
+                              'Profile',
+                              style: TextStyle(
+                                  color: currentIndex == 4
+                                      ? Colors.purple
+                                      : Colors.grey,
+                                  fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            elevation: 15,
+            backgroundColor: Colors.purple,
+            child: Image.asset(
+              'assets/images/brain.png',
+              color: currentIndex == 0 ? Colors.white : Colors.grey,
+              scale: 12,
+            ),
+            onPressed: () {
+
+              setState(() {
+                currentIndex = 0;
+                // currentPage =  ClassifierScreen();
+              });
+              Navigator.pushNamed(context, HomeLayout.roudeName);
+            },
+          ),
+
+
+
+        );
+      },
+      listener: (context,state){},
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:alzahimer/resources/app_images.dart';
 import 'package:flutter/material.dart';
 Widget submitButton({
   required String submitText,
@@ -8,7 +9,7 @@ Widget submitButton({
     width: double.infinity,
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor:  Colors.lightBlue
+        backgroundColor:  Colors.purple
         ,
       ),
       onPressed: onTap,
@@ -16,9 +17,9 @@ Widget submitButton({
         submitText,
         style: const TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
             fontSize: 20,
-            fontFamily: 'oxygen'),
+            fontFamily: 'Poppins'),
       ),
     ),
   );
@@ -43,7 +44,7 @@ customTextField(
       contentPadding: EdgeInsets.symmetric(vertical: cp ?? 18),
       labelStyle: TextStyle(
         fontSize: 15,
-        fontFamily: 'oxygen',
+        fontFamily: 'Poppins',
         fontWeight: FontWeight.w600,
       ),
       labelText: title,
@@ -67,7 +68,7 @@ formBackground({
       image: DecorationImage(
 
         image: AssetImage(
-            'assets/images/form_backimage.jpg'
+           AppImages.loginBackground,
         ),
         fit: BoxFit.cover,
 
@@ -88,11 +89,10 @@ formBackground({
         children:  [
           Text(welcomeTitle,
             style:const  TextStyle(
-
               color: Colors.black,
-              fontSize: 30,
-              fontFamily: 'oxygen',
-              fontWeight: FontWeight.w800,
+              fontSize: 32,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 8,),
@@ -100,7 +100,7 @@ formBackground({
             style: const TextStyle(
               color: Colors.black54,
               fontSize: 16,
-              fontFamily: 'oxygen',
+              fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,
             ),
           )
@@ -131,6 +131,7 @@ customField({
   required IconData prefixIcon,
   required String? Function(String?) validate,
   IconButton? suffixIcon,
+
   required TextEditingController controller,
   bool? obsecureText,
   bool? autofocus,
@@ -146,7 +147,7 @@ customField({
       suffixIcon: suffixIcon,
       hintStyle: const TextStyle(
         color: Colors.grey,
-        fontFamily: 'oxygen',
+        fontFamily: 'Poppins',
         // fontWeight: FontWeight.w600,
       ),
       prefixIcon: Icon(prefixIcon),

@@ -19,11 +19,6 @@ class ShowHistory extends StatelessWidget {
         User!.uid; // Replace with the user ID you want to display images for
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.green,
-        title: Text('Image History'),
-      ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: DataBaseUtil.readUserFromFirStoreStrem(userId),
         builder: (context, snapshot) {

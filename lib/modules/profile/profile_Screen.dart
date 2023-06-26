@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:alzahimer/Models/My_User.dart';
-import 'package:alzahimer/modules/login/login_screen.dart';
-import 'package:alzahimer/modules/profile/change_PassWored.dart';
+import 'package:alzahimer/login/login_screen.dart';import 'package:alzahimer/modules/profile/change_PassWored.dart';
 import 'package:alzahimer/shard/network/remote/datdbase/database_utils.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -313,7 +312,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await FirebaseAuth.instance.signOut();
       User? FirebaseUser = FirebaseAuth.instance.currentUser;
       providere.firebaseUser = FirebaseUser;
-      Navigator.pushNamed(context, LoginScreen.roudeName);
+      Navigator.pushNamed(context, '/login_screen');
       // User is now signed out.
     } catch (e) {
       // An error occurred while trying to sign out the user.
@@ -329,7 +328,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         await user.delete();
         User? FirebaseUser = FirebaseAuth.instance.currentUser;
         providere.firebaseUser = FirebaseUser;
-        Navigator.pushNamed(context, LoginScreen.roudeName);
+        Navigator.pushNamed(context, 'login_screen');
       } catch (e) {
         // An error occurred while trying to delete the user account.
         print('Failed to delete user account: $e');
