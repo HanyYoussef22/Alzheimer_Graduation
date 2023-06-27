@@ -50,6 +50,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       image: image ??
           'https://previews.123rf.com/images/kritchanut/kritchanut1406/kritchanut140600093/29213195-male-silhouette-avatar-profile-picture.jpg',
       phone: '01000000000',
+
       registerDate: DateFormat('yyyy-MM-dd')
           .format(DateTime.now()).toString(),
       birthDate: birthDate,

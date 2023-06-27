@@ -44,7 +44,7 @@ class ShowHistory extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Colors.purple,
+                              color: Colors.green,
                               width: 2
                           ),
                           // shape: BoxShape.circle,

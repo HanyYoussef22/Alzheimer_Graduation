@@ -76,259 +76,259 @@ class _ClassifierScreenState
         body: _loading
             ? Loading()
             : Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _image == null
+                    ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _image == null
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                  Container(
-                                    child: Lottie.asset('assets/3.json'),
+                      Container(
+                        child: Lottie.asset('assets/3.json'),
+                      ),
+                      Text(
+                        'Classify Your MRI !',
+                        style: TextStyle(
+                            color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 25),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(15),
+                                    topLeft: Radius.circular(15)),
+                              ),
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    const BorderRadius.only(
+                                        topRight:
+                                        Radius.circular(15),
+                                        topLeft:
+                                        Radius.circular(
+                                            15)),
+                                    color: Colors.purple
+                                        .withOpacity(0.9),
                                   ),
-                                  Text(
-                                    'Classify Your MRI !',
-                                    style: TextStyle(
-                                      color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 25),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(15),
-                                                topLeft: Radius.circular(15)),
-                                          ),
-                                          context: context,
-                                          builder: (context) {
-                                            return Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topRight:
-                                                            Radius.circular(15),
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                15)),
-                                                color: Colors.purple
-                                                    .withOpacity(0.9),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height *
+                                      .22,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisSize:
+                                        MainAxisSize.min,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .center,
+                                        children: [
+                                          Container(
+                                            decoration:
+                                            const BoxDecoration(
+                                              border:
+                                              GradientBoxBorder(
+                                                gradient:
+                                                LinearGradient(
+                                                    colors: [
+                                                      Colors.blue,
+                                                      Colors.red,
+                                                      Colors.blue,
+                                                      Colors.red,
+                                                    ]),
+                                                width: 2,
                                               ),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  .22,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          border:
-                                                              GradientBoxBorder(
-                                                            gradient:
-                                                                LinearGradient(
-                                                                    colors: [
-                                                                  Colors.blue,
-                                                                  Colors.red,
-                                                                  Colors.blue,
-                                                                  Colors.red,
-                                                                ]),
-                                                            width: 2,
-                                                          ),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        height: 65,
-                                                        width: 65,
-                                                        child: IconButton(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          onPressed: () {
-                                                            takeImage();
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          icon: const Icon(
-                                                            Icons.camera_alt,
-                                                            color: Colors.white,
-                                                            size: 35,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      const Text(
-                                                        'Camera',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Poppins',
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 80,
-                                                  ),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      Container(
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          border:
-                                                              GradientBoxBorder(
-                                                            gradient:
-                                                                LinearGradient(
-                                                                    colors: [
-                                                                  Colors.blue,
-                                                                  Colors.red,
-                                                                  Colors.blue,
-                                                                  Colors.red,
-                                                                ]),
-                                                            width: 2,
-                                                          ),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        height: 65,
-                                                        width: 65,
-                                                        child: IconButton(
-                                                          alignment:
-                                                              Alignment.center,
-                                                          onPressed: () {
-                                                            pickImage();
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          icon: const Icon(
-                                                            Icons.image,
-                                                            color: Colors.white,
-                                                            size: 35,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      const Text(
-                                                        'Gallery',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: 'Poppins',
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
+                                              shape:
+                                              BoxShape.circle,
+                                            ),
+                                            height: 65,
+                                            width: 65,
+                                            child: IconButton(
+                                              alignment:
+                                              Alignment.center,
+                                              onPressed: () {
+                                                takeImage();
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.white,
+                                                size: 35,
                                               ),
-                                            );
-                                          });
-                                    },
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          .80,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                            color: Colors.purple, width: 3),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: const [
-                                          Icon(
-                                            Icons.image_outlined,
-                                            color: Colors.purple,
+                                            ),
                                           ),
-                                          SizedBox(
-                                            width: 8,
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                          Text('CHOOSE IMAGE',
-                                              style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.purple))
+                                          const Text(
+                                            'Camera',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Poppins',
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                    ),
-                                  )
-                                ])
-                          : result1(_image!, _outputs),
-
-                      _image == null
-                          ? Container()
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: defaultButton(
-                                btnColor: PrimaryColor,
-                                radius: 15,
-                                text: 'save result to the Gallery',
-                                onPressed: () async {
-                                  final imageee =
-                                      await controllerr.captureFromWidget(
-                                          result1(_image!, _outputs));
-                                  if (imageee == null) return;
-                                  await save(imageee);
-                                },
+                                      const SizedBox(
+                                        width: 80,
+                                      ),
+                                      Column(
+                                        mainAxisSize:
+                                        MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            decoration:
+                                            const BoxDecoration(
+                                              border:
+                                              GradientBoxBorder(
+                                                gradient:
+                                                LinearGradient(
+                                                    colors: [
+                                                      Colors.blue,
+                                                      Colors.red,
+                                                      Colors.blue,
+                                                      Colors.red,
+                                                    ]),
+                                                width: 2,
+                                              ),
+                                              shape:
+                                              BoxShape.circle,
+                                            ),
+                                            height: 65,
+                                            width: 65,
+                                            child: IconButton(
+                                              alignment:
+                                              Alignment.center,
+                                              onPressed: () {
+                                                pickImage();
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.image,
+                                                color: Colors.white,
+                                                size: 35,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          const Text(
+                                            'Gallery',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Poppins',
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width *
+                              .80,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.purple, width: 3),
+                          ),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.center,
+                            children: const [
+                              Icon(
+                                Icons.image_outlined,
+                                color: Colors.purple,
                               ),
-                            ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _image == null
-                          ? Container()
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: defaultButton(
-                                btnColor: PrimaryColor,
-                                radius: 15,
-                                text: 'save result to the Cloud',
-                                onPressed: () async {
-                                  final imageee =
-                                      await controllerr.captureFromWidget(
-                                          result1(_image!, _outputs));
-                                  if (imageee == null) return;
-                                  // await save(imageee);
-
-                                  await uploadImage(imageee);
-                                },
+                              SizedBox(
+                                width: 8,
                               ),
-                            ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // _image == null
-                      //     ? Container()
-                      //     : const Text(
-                      //   ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
-                      //   style: TextStyle(color: Colors.red, fontSize: 20),
-                      // ),
-                    ],
+                              Text('CHOOSE IMAGE',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.purple))
+                            ],
+                          ),
+                        ),
+                      )
+                    ])
+                    : result1(_image!, _outputs),
+
+                _image == null
+                    ? Container()
+                    : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: defaultButton(
+                    btnColor: PrimaryColor,
+                    radius: 15,
+                    text: 'save result to the Gallery',
+                    onPressed: () async {
+                      final imageee =
+                      await controllerr.captureFromWidget(
+                          result1(_image!, _outputs));
+                      if (imageee == null) return;
+                      await save(imageee);
+                    },
                   ),
                 ),
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
+                _image == null
+                    ? Container()
+                    : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: defaultButton(
+                    btnColor: PrimaryColor,
+                    radius: 15,
+                    text: 'save result to the Cloud',
+                    onPressed: () async {
+                      final imageee =
+                      await controllerr.captureFromWidget(
+                          result1(_image!, _outputs));
+                      if (imageee == null) return;
+                      // await save(imageee);
+
+                      await uploadImage(imageee);
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                // _image == null
+                //     ? Container()
+                //     : const Text(
+                //   ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
+                //   style: TextStyle(color: Colors.red, fontSize: 20),
+                // ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

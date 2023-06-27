@@ -10,6 +10,7 @@ import 'package:icon_broken/icon_broken.dart';
 
 import '../article_screen/articles/articles_screen.dart';
 // import '../home.dart';
+import '../home.dart';
 import '../modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
 import '../modules/Classifier/hoistry/hoistry.dart';
 import '../modules/profile/profile_Screen.dart';
@@ -184,7 +185,6 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
                           setState(
                                 () {
                               currentPage = const Profile();
-                              currentIndex = 4;
                             },
                           );
                         },
@@ -232,7 +232,6 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
               Navigator.pushNamed(context, HomeLayout.roudeName);
             },
           ),
-
 
 
         );

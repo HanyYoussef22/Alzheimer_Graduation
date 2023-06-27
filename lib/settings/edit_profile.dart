@@ -46,7 +46,7 @@ class EditProfileScreen extends StatelessWidget {
                   phone: phoneController.text,
                 );
               }, child: const Text('UPDATE', style: TextStyle(
-                color: Colors.white
+                  color: Colors.white
               ),)),
             ],
           ),
@@ -59,7 +59,7 @@ class EditProfileScreen extends StatelessWidget {
               children: [
                 ConditionalBuilder(condition: state is UserUpdateLoadingState,
                     builder: (context){
-                  return LinearProgressIndicator(color: Colors.purple.withOpacity(0.9),);
+                      return LinearProgressIndicator(color: Colors.purple.withOpacity(0.9),);
                     }, fallback: (context){return const SizedBox();}),
                 Stack(
                   alignment: AlignmentDirectional.bottomEnd,

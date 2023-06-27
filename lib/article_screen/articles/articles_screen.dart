@@ -1,5 +1,7 @@
 
+import 'package:alzahimer/article_screen/articles/single_article_screen.dart';
 import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +28,7 @@ class ArticleScreen extends StatelessWidget {
                   return newsWidget(
                     author: cubit.articles[index].author!,
                     onTap: (){
-                      Navigator.pushNamed(context, '/article_details_screen',
+                      Navigator.pushNamed(context, ArticleDetailsScreen.RoudeName,
                       arguments: cubit.articles[index],
                       );
                     },

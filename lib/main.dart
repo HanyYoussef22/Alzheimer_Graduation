@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'article_screen/articles/single_article_screen.dart';
 import 'modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
 import 'modules/profile/change_PassWored.dart';
 import 'modules/profile/change_name.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
               ChangeName.RoudeName: (c) => ChangeName(),
               ProfileScreen.RoudeName: (c) => ProfileScreen(),
               ShowHistory.RouteName: (c) => ShowHistory(),
+              ArticleDetailsScreen.RoudeName:(c)=>ArticleDetailsScreen()
             },
             debugShowCheckedModeBanner: false,
             theme: MyThemeData.lightTheme,

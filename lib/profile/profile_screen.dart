@@ -40,7 +40,7 @@ class Profile extends StatelessWidget {
                               CircleAvatar(
                                 radius: 45,
                                 backgroundImage:
-                                    NetworkImage(cubit.model!.image!),
+                                NetworkImage(cubit.model!.image!),
                               ),
                               const SizedBox(
                                 width: 15,
@@ -80,7 +80,7 @@ class Profile extends StatelessWidget {
                           builder: (context) {
                             return Padding(
                               padding:
-                                  const EdgeInsets.only(left: 22, right: 22),
+                              const EdgeInsets.only(left: 22, right: 22),
                               child: Row(
                                 //crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
@@ -218,20 +218,20 @@ class Profile extends StatelessWidget {
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return EditProfileScreen();
-                              }));
+                                    return EditProfileScreen();
+                                  }));
                             },
                             child: Row(
                               children:  [
-                                Icon(Icons.settings,color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
-                          ),
+                                Icon(Icons.settings,color: Colors.grey,
+                                ),
                                 SizedBox(
                                   width: 20,
                                 ),
                                 Text(
                                   'Settings',
                                   style: TextStyle(
-                                      color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
+                                      color: Colors.grey,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500),
                                 )
@@ -239,7 +239,7 @@ class Profile extends StatelessWidget {
                             ),
                           ),
                         ),
-                         Divider(
+                        Divider(
                           color: Colors.grey,
                           thickness: 1.5,
                           height: 40,
@@ -250,7 +250,7 @@ class Profile extends StatelessWidget {
                             onTap: () {},
                             child: Row(
                               children:  [
-                                Icon(Icons.attachment_sharp,color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
+                                Icon(Icons.attachment_sharp,color: Colors.grey,
                                 ),
                                 SizedBox(
                                   width: 20,
@@ -258,7 +258,7 @@ class Profile extends StatelessWidget {
                                 Text(
                                   'History',
                                   style: TextStyle(
-                                    color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
+                                      color: Colors.grey,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500),
                                 )
@@ -315,8 +315,8 @@ class Profile extends StatelessWidget {
                               CacheHelper.removeData('signed').then((value) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const LoginScreen();
-                                }));
+                                      return const LoginScreen();
+                                    }));
                               });
                             },
                           ),
