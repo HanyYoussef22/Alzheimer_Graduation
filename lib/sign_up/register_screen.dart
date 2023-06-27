@@ -1,4 +1,5 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
+import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:alzahimer/sign_up/register_cubit.dart';
 import 'package:alzahimer/sign_up/register_state.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -9,6 +10,7 @@ import 'package:intl/intl.dart';
 import '../login/login_screen.dart';
 import '../shard/network/local/cache_helper.dart';
 import '../shard/shared/components.dart';
+import '../shard/styles/clors.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -36,8 +38,42 @@ class RegisterScreen extends StatelessWidget {
                child: Stack(
                  children: [
                    formBackground(
+                     isDark: BlocProvider.of<ThemeCubit>(context).state,
                      welcomeHint: 'Register now and live the experience ..',
                      welcomeTitle: 'Welcome',
+                   ),
+                   Visibility(
+                     visible:BlocProvider.of<ThemeCubit>(context).state,
+                     child:Container(
+                       width: double.infinity,
+                       height: double.infinity,
+                       padding: const EdgeInsets.symmetric(
+                           horizontal: 20,
+                           vertical: 18
+                       ),
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children:  [
+                           Text('Welcome again ,',
+                             style:const  TextStyle(
+                               color: Colors.white,
+                               fontSize: 32,
+                               fontFamily: 'Poppins',
+                               fontWeight: FontWeight.w700,
+                             ),
+                           ),
+                           const SizedBox(height: 8,),
+                           Text('Login now and live the experience',
+                             style: const TextStyle(
+                               color: Colors.white,
+                               fontSize: 16,
+                               fontFamily: 'Poppins',
+                               fontWeight: FontWeight.w500,
+                             ),
+                           )
+                         ],
+                       ),
+                     ),
                    ),
                    layoutForm(
                      Column(
@@ -51,9 +87,10 @@ class RegisterScreen extends StatelessWidget {
                          ),
                          Center(
                            child: Card(
+                             color: BlocProvider.of<ThemeCubit>(context).state? Color(0xFF141922):Colors.white,
                              elevation: 9,
                              shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(0)),
+                                 borderRadius: BorderRadius.circular(11)),
                              child: Container(
                                padding: const EdgeInsets.all(18),
                                // height: screenSize.height * 0.55,
@@ -82,11 +119,10 @@ class RegisterScreen extends StatelessWidget {
                                                ),
                                              );
                                            },
-                                           child: const Text(
+                                           child:  Text(
                                              'LOGIN',
                                              style: TextStyle(
-                                               color: Colors.grey,
-                                               fontWeight: FontWeight.w700,
+                                               color: BlocProvider.of<ThemeCubit>(context).state? Colors.purple:Colors.grey,                                               fontWeight: FontWeight.w700,
                                                fontSize: 18,
                                              ),
                                            ),
@@ -105,7 +141,7 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
-                                       name: 'Name',
+                                       isDark: BlocProvider.of<ThemeCubit>(context).state,                                       name: 'Name',
                                        prefixIcon: Icons.person,
                                        validate: (value) {
                                          if (value!.isEmpty) {
@@ -119,6 +155,7 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
+                                       isDark: BlocProvider.of<ThemeCubit>(context).state,
                                        name: 'Email',
                                        prefixIcon: Icons.mail,
                                        validate: (value) {
@@ -137,6 +174,7 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
+                                         isDark: BlocProvider.of<ThemeCubit>(context).state,
                                          name: 'Birth',
                                          fieldTapping: (){
                                            showDatePicker(
@@ -157,6 +195,7 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
+                                       isDark: BlocProvider.of<ThemeCubit>(context).state,
                                        obsecureText: true,
                                        name: 'Password',
                                        prefixIcon: Icons.lock,
@@ -172,6 +211,7 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
+                                       isDark: BlocProvider.of<ThemeCubit>(context).state,
                                        obsecureText: true,
                                        name: 'Confirm Password',
                                        prefixIcon: Icons.lock,

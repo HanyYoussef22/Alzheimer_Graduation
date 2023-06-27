@@ -10,6 +10,7 @@ import '../modules/password_reset/password_reset.dart';
 import '../shard/login_handle.dart';
 import '../shard/network/local/cache_helper.dart';
 import '../shard/shared/components.dart';
+import '../shard/styles/Theme_Cubit.dart';
 import '../sign_up/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -29,9 +30,44 @@ class LoginScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   formBackground(
+                    isDark: BlocProvider.of<ThemeCubit>(context).state,
                     welcomeTitle: 'Welcome again ,',
                     welcomeHint: 'Login now and live the experience',
                   ),
+            Visibility(
+              visible:BlocProvider.of<ThemeCubit>(context).state,
+              child:Container(
+                width: double.infinity,
+                height: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 35
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:  [
+                    Text('Welcome again ,',
+                      style:const  TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 8,),
+                    Text('Login now and live the experience',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
                   layoutForm(
                     Column(
                       children: [
@@ -47,13 +83,13 @@ class LoginScreen extends StatelessWidget {
                               Center(
                                 child: Card(
                                   elevation: 10,
+
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0),
+                                    borderRadius: BorderRadius.circular(11),
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
+                                      color: BlocProvider.of<ThemeCubit>(context).state? Color(0xFF141922):Colors.white,                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                     // height: MediaQuery.of(context).size.height *
                                     //     0.45,
@@ -74,11 +110,10 @@ class LoginScreen extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  const Text(
+                                                   Text(
                                                     'LOGIN',
                                                     style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight:
+                                                      color: BlocProvider.of<ThemeCubit>(context).state? Colors.grey:Colors.black,                                                      fontWeight:
                                                           FontWeight.w700,
                                                       fontSize: 30,
                                                     ),
@@ -102,10 +137,10 @@ class LoginScreen extends StatelessWidget {
                                                         ),
                                                       );
                                                     },
-                                                    child: const Text(
+                                                    child:  Text(
                                                       'SIGN UP',
                                                       style: TextStyle(
-                                                        color: Colors.grey,
+                                                        color: BlocProvider.of<ThemeCubit>(context).state? Colors.purple:Colors.grey,
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontSize: 18,
@@ -118,6 +153,7 @@ class LoginScreen extends StatelessWidget {
                                                 height: 12,
                                               ),
                                               customField(
+                                                isDark: BlocProvider.of<ThemeCubit>(context).state,
                                                 name: 'Email',
                                                 controller: emailController,
                                                 prefixIcon: Icons.email,
@@ -139,6 +175,7 @@ class LoginScreen extends StatelessWidget {
                                                 height: 20,
                                               ),
                                               customField(
+                                                  isDark: BlocProvider.of<ThemeCubit>(context).state,
                                                   controller: passController,
                                                   name: 'Password',
                                                   prefixIcon: Icons.lock,
@@ -197,9 +234,9 @@ class LoginScreen extends StatelessWidget {
                                                         return const SizedBox(
                                                           height: 25,
                                                           width: 25,
-                                                          child: CircularProgressIndicator(
+                                                          child:
+                                                              CircularProgressIndicator(
                                                             color: Colors.white,
-
                                                           ),
                                                         );
                                                       },
@@ -264,106 +301,109 @@ class LoginScreen extends StatelessWidget {
               Navigator.pushNamed(context, HomeLayout.roudeName);
             });
           }
-          if(state is LoginFailureState) {
-            if(state.error == firebaseEmailFormat) {
+          if (state is LoginFailureState) {
+            if (state.error == firebaseEmailFormat) {
               AwesomeDialog(
-                  btnOkColor: Colors.indigoAccent,
-                  context: context,
-                  dialogType: DialogType.error,
-                  borderSide: const BorderSide(
-                    color: Colors.redAccent,
-                    width: 2,
-                  ),
-                  width: 590,
-                  buttonsBorderRadius: const BorderRadius.all(
-                    Radius.circular(2),
-                  ),
-                  dismissOnTouchOutside: true,
-                  dismissOnBackKeyPress: false,
-                  buttonsTextStyle: const TextStyle(fontSize: 17,fontFamily: 'Poppins'),
-                  headerAnimationLoop: false,
-                  animType: AnimType.bottomSlide,
-                  title: 'Wrong Format',
-                  titleTextStyle: const TextStyle(
-                    fontSize: 17,
-                    fontFamily: 'oxygen',
-                    fontWeight: FontWeight.w700,
-                  ),
-                  descTextStyle:
-                  const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                  desc:
-                  'The email address is badly formatted, Please write it correctly',
-                  showCloseIcon: true,
-                  btnOkOnPress: () {},
-                  btnOkText: 'OK').show();
+                      btnOkColor: Colors.indigoAccent,
+                      context: context,
+                      dialogType: DialogType.error,
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 2,
+                      ),
+                      width: 590,
+                      buttonsBorderRadius: const BorderRadius.all(
+                        Radius.circular(2),
+                      ),
+                      dismissOnTouchOutside: true,
+                      dismissOnBackKeyPress: false,
+                      buttonsTextStyle:
+                          const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
+                      headerAnimationLoop: false,
+                      animType: AnimType.bottomSlide,
+                      title: 'Wrong Format',
+                      titleTextStyle: const TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'oxygen',
+                        fontWeight: FontWeight.w700,
+                      ),
+                      descTextStyle:
+                          const TextStyle(fontFamily: 'oxygen', fontSize: 15),
+                      desc:
+                          'The email address is badly formatted, Please write it correctly',
+                      showCloseIcon: true,
+                      btnOkOnPress: () {},
+                      btnOkText: 'OK')
+                  .show();
             }
-            if(state.error == firebaseWrongEmail) {
+            if (state.error == firebaseWrongEmail) {
               AwesomeDialog(
-                  btnOkColor: Colors.indigoAccent,
-                  context: context,
-                  dialogType: DialogType.error,
-                  borderSide: const BorderSide(
-                    color: Colors.redAccent,
-                    width: 2,
-                  ),
-                  width: 590,
-                  buttonsBorderRadius: const BorderRadius.all(
-                    Radius.circular(2),
-                  ),
-                  dismissOnTouchOutside: true,
-                  dismissOnBackKeyPress: false,
-                  buttonsTextStyle: const TextStyle(fontSize: 17,fontFamily: 'Poppins'),
-                  headerAnimationLoop: false,
-                  animType: AnimType.bottomSlide,
-                  title: 'Wrong Email',
-                  titleTextStyle: const TextStyle(
-                    fontSize: 17,
-                    fontFamily: 'oxygen',
-                    fontWeight: FontWeight.w700,
-                  ),
-                  descTextStyle:
-                  const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                  desc:
-                  'There is no user record corresponding to this identifier.'
-                      ' The user may have been deleted.',
-                  showCloseIcon: true,
-                  btnOkOnPress: () {},
-                  btnOkText: 'OK').show();
+                      btnOkColor: Colors.indigoAccent,
+                      context: context,
+                      dialogType: DialogType.error,
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 2,
+                      ),
+                      width: 590,
+                      buttonsBorderRadius: const BorderRadius.all(
+                        Radius.circular(2),
+                      ),
+                      dismissOnTouchOutside: true,
+                      dismissOnBackKeyPress: false,
+                      buttonsTextStyle:
+                          const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
+                      headerAnimationLoop: false,
+                      animType: AnimType.bottomSlide,
+                      title: 'Wrong Email',
+                      titleTextStyle: const TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'oxygen',
+                        fontWeight: FontWeight.w700,
+                      ),
+                      descTextStyle:
+                          const TextStyle(fontFamily: 'oxygen', fontSize: 15),
+                      desc:
+                          'There is no user record corresponding to this identifier.'
+                          ' The user may have been deleted.',
+                      showCloseIcon: true,
+                      btnOkOnPress: () {},
+                      btnOkText: 'OK')
+                  .show();
             }
-            if(state.error == firebaseWrongPassword) {
+            if (state.error == firebaseWrongPassword) {
               AwesomeDialog(
-                  btnOkColor: Colors.indigoAccent,
-                  context: context,
-                  dialogType: DialogType.error,
-                  borderSide: const BorderSide(
-                    color: Colors.redAccent,
-                    width: 2,
-                  ),
-                  width: 590,
-                  buttonsBorderRadius: const BorderRadius.all(
-                    Radius.circular(2),
-                  ),
-                  dismissOnTouchOutside: true,
-                  dismissOnBackKeyPress: false,
-                  buttonsTextStyle: const TextStyle(fontSize: 17,fontFamily: 'Poppins'),
-                  headerAnimationLoop: false,
-                  animType: AnimType.bottomSlide,
-                  title: 'Wrong Password',
-                  titleTextStyle: const TextStyle(
-                    fontSize: 17,
-                    fontFamily: 'oxygen',
-                    fontWeight: FontWeight.w700,
-                  ),
-                  descTextStyle:
-                  const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                  desc:
-                  passToastMsg,
-                  showCloseIcon: true,
-                  btnOkOnPress: () {},
-                  btnOkText: 'OK').show();
+                      btnOkColor: Colors.indigoAccent,
+                      context: context,
+                      dialogType: DialogType.error,
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 2,
+                      ),
+                      width: 590,
+                      buttonsBorderRadius: const BorderRadius.all(
+                        Radius.circular(2),
+                      ),
+                      dismissOnTouchOutside: true,
+                      dismissOnBackKeyPress: false,
+                      buttonsTextStyle:
+                          const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
+                      headerAnimationLoop: false,
+                      animType: AnimType.bottomSlide,
+                      title: 'Wrong Password',
+                      titleTextStyle: const TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'oxygen',
+                        fontWeight: FontWeight.w700,
+                      ),
+                      descTextStyle:
+                          const TextStyle(fontFamily: 'oxygen', fontSize: 15),
+                      desc: passToastMsg,
+                      showCloseIcon: true,
+                      btnOkOnPress: () {},
+                      btnOkText: 'OK')
+                  .show();
             }
-
-
           }
         },
       ),

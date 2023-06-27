@@ -1,3 +1,4 @@
+import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../../Models/article_model.dart';
 
 class ArticleDetailsScreen extends StatelessWidget {
   const ArticleDetailsScreen({Key? key}) : super(key: key);
+  static const String RoudeName='ArticleDetailsScreen';
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                   padding: EdgeInsets.all(15),
                   child: Text(
                     model.content!,
-                    style: const TextStyle(
+                    style:  TextStyle(
+                      color: BlocProvider.of<ThemeCubit>(context).state?Colors.white:Colors.black,
                       fontFamily: 'oxygen',
                       wordSpacing: 2,
                       fontSize: 17,

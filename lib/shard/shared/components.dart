@@ -1,5 +1,6 @@
 import 'package:alzahimer/resources/app_images.dart';
 import 'package:flutter/material.dart';
+
 Widget submitButton({
   required String submitText,
   required onTap,
@@ -60,10 +61,47 @@ customTextField(
 
 Widget
 formBackground({
+  required bool isDark,
   required String welcomeTitle,
   required String welcomeHint,
 }) {
-  return Container(
+  return isDark?
+  Container(
+    decoration:  BoxDecoration(
+      color:Color(0xFF060E1E),
+    ),
+    child: Container(
+      width: double.infinity,
+      height: double.infinity,
+      padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 35
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:  [
+          Text(welcomeTitle,
+            style:const  TextStyle(
+              color: Colors.black,
+              fontSize: 32,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8,),
+          Text(welcomeHint,
+            style: const TextStyle(
+              color: Colors.black54,
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    ),
+  ):
+  Container(
     decoration: const BoxDecoration(
       image: DecorationImage(
 
@@ -126,6 +164,7 @@ Widget layoutForm(Widget widget) {
 }
 
 customField({
+  required bool isDark,
   VoidCallback? fieldTapping,
   required String name,
   required IconData prefixIcon,
@@ -152,7 +191,7 @@ customField({
       ),
       prefixIcon: Icon(prefixIcon),
       filled: true,
-      fillColor: const Color(0xffEEEEEE),
+      fillColor: isDark?Colors.white70: Color(0xffEEEEEE),
       border: InputBorder.none,
     ),
   );
