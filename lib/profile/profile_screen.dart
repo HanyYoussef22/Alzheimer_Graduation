@@ -8,7 +8,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/Localization_Cubit.dart';
 import '../login/login_screen.dart';
 import '../resources/app_images.dart';
 import '../shard/components/custom_row.dart';
@@ -158,8 +159,8 @@ class Profile extends StatelessWidget {
                                         ),
                                       ),
 
-                                      const Text(
-                                        'Classifications',style: TextStyle(
+                                       Text(
+                                          AppLocalizations.of(context)!.classifyin,style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 18,
                                         height: .98,
@@ -191,8 +192,8 @@ class Profile extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    const Text(
-                                      'Register Date',
+                                     Text(
+                                        AppLocalizations.of(context)!.registerdate,
                                       style: TextStyle(
                                           color: Colors.grey,
                                           fontSize: 18,
@@ -229,7 +230,7 @@ class Profile extends StatelessWidget {
                                   width: 20,
                                 ),
                                 Text(
-                                  'Settings',
+                                    AppLocalizations.of(context)!.setting,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontFamily: 'Poppins',
@@ -256,7 +257,7 @@ class Profile extends StatelessWidget {
                                   width: 20,
                                 ),
                                 Text(
-                                  'History',
+                                  AppLocalizations.of(context)!.history,
                                   style: TextStyle(
                                       color: Colors.grey,
                                       fontFamily: 'Poppins',
@@ -287,13 +288,14 @@ class Profile extends StatelessWidget {
                                       ? Icon(Icons.dark_mode, color: Colors.grey, size: 40)
                                       : Icon(Icons.light_mode, color: Colors.amberAccent, size: 40),
                                   SizedBox(width: 8.0),
-                                  BlocProvider.of<ThemeCubit>(context).state?Text('Dark',style: TextStyle(color: Colors.grey),):Text('Light',style: TextStyle(color: Colors.amber),),
+                                  BlocProvider.of<ThemeCubit>(context).state?Text(AppLocalizations.of(context)!.dark,style: TextStyle(color: Colors.grey),):Text(AppLocalizations.of(context)!.light,style: TextStyle(color: Colors.amber),),
                                 ],
                               ),
                             );
 
                           },
                         ),
+
                         Divider(
                           color: Colors.grey,
                           thickness: 1.5,
@@ -305,7 +307,7 @@ class Profile extends StatelessWidget {
                           child: CustomRow(
                             textColor: Colors.red,
                             imageColor: Colors.red,
-                            text: 'Log Out',
+                            text: AppLocalizations.of(context)!.logout,
                             image: AppImages.logout,
                             function: () {
                               cubit.model?.email.isEmpty;

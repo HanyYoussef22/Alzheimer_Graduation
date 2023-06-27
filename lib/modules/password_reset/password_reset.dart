@@ -1,8 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shard/shared/components.dart';
+import '../../shard/styles/Theme_Cubit.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key}) : super(key: key);
@@ -25,7 +27,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor:BlocProvider.of<ThemeCubit>(context).state? Color(0xFF141922):Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(
@@ -49,18 +51,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
+                 Text(
                   'Reset password',
+
                   style: TextStyle(
-                      color: Colors.black, fontSize: 30, fontFamily: 'oxygen'),
+                      color: BlocProvider.of<ThemeCubit>(context).state? Colors.white:Color(0xFF141922),
+                      fontSize: 30, fontFamily: 'oxygen'),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
+                 Text(
                   'Enter the email address associated with your account and we\'ll send an email with instructions to reset your password ',
                   style: TextStyle(
-                    color: Colors.black54,
+                    color: BlocProvider.of<ThemeCubit>(context).state? Colors.white:Color(0xFF141922),                    // color: Colors.black54,
                     fontSize: 16,
                     fontFamily: 'oxygen',
                   ),
@@ -68,16 +72,25 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                customTextField(
-                  hintText: 'Email',
-                  cp: 16,
-                  Controller: emailController,
-                  validator: (email) {
-                    email != null
-                        ? 'Enter a valid email'
-                        : null;
+
+                customField(
+                  isDark: BlocProvider.of<ThemeCubit>(context).state,
+                  name: AppLocalizations.of(context)!.email,
+                  controller: emailController,
+                  prefixIcon: Icons.email,
+                  validate: (text) {
+                    if (text!.isEmpty ||
+                        text.trim().isEmpty) {
+                      return 'Pleas Enter Your Email';
+                    }
+                    bool emailValid = RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(text);
+                    if (!emailValid) {
+                      return 'Email not Valid';
+                    }
+                    return null;
                   },
-                  prefixIcon: Icons.email_rounded,
                 ),
                 const SizedBox(
                   height: 35,
@@ -86,46 +99,42 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   height: 48,
                   child: ElevatedButton(
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.lightBlue),
-                          shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ))),
+                        ),
                       onPressed: () {
-                        RestPass();
-                        print('test');
-                        AwesomeDialog(
-                                btnOkColor: Colors.indigoAccent,
-                                context: context,
-                                dialogType: DialogType.success,
-                                borderSide: const BorderSide(
-                                  color: Colors.green,
-                                  width: 2,
-                                ),
-                                width: 590,
-                                buttonsBorderRadius: const BorderRadius.all(
-                                  Radius.circular(2),
-                                ),
-                                dismissOnTouchOutside: true,
-                                dismissOnBackKeyPress: false,
-                                buttonsTextStyle: TextStyle(fontSize: 17),
-                                headerAnimationLoop: false,
-                                animType: AnimType.bottomSlide,
-                                title: 'Sent Successfully',
-                                titleTextStyle: const TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: 'oxygen',
-                              fontWeight: FontWeight.w700,
-                            ),
-                            descTextStyle:
-                            const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                            desc:
-                            'Password reset email has been sent, please check your email.',
-                            showCloseIcon: true,
-                            btnOkOnPress: () {},
-                            btnOkText: 'OK').show();
+                        if(formKey.currentState!.validate()){
+                          RestPass();
+                          print('test');
+                          AwesomeDialog(
+                              btnOkColor: Colors.indigoAccent,
+                              context: context,
+                              dialogType: DialogType.success,
+                              borderSide: const BorderSide(
+                                color: Colors.green,
+                                width: 2,
+                              ),
+                              width: 590,
+                              buttonsBorderRadius: const BorderRadius.all(
+                                Radius.circular(2),
+                              ),
+                              dismissOnTouchOutside: true,
+                              dismissOnBackKeyPress: false,
+                              buttonsTextStyle: TextStyle(fontSize: 17),
+                              headerAnimationLoop: false,
+                              animType: AnimType.bottomSlide,
+                              title: 'Sent Successfully',
+                              titleTextStyle: const TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'oxygen',
+                                fontWeight: FontWeight.w700,
+                              ),
+                              descTextStyle:
+                              const TextStyle(fontFamily: 'oxygen', fontSize: 15),
+                              desc:
+                              'Password reset email has been sent, please check your email.',
+                              showCloseIcon: true,
+                              btnOkOnPress: () {},
+                              btnOkText: 'OK').show();
+                        }
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -153,6 +162,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   void RestPass() {
-    FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+    if (formKey.currentState!.validate()) {
+      FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+    }
   }
 }
+

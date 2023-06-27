@@ -21,7 +21,7 @@ import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:tflite/tflite.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../../resources/app_colors.dart';
 import '../../../shard/styles/clors.dart';
@@ -92,7 +92,7 @@ class _ClassifierScreenState
                         child: Lottie.asset('assets/3.json'),
                       ),
                       Text(
-                        'Classify Your MRI !',
+                        AppLocalizations.of(context)!.classify,
                         style: TextStyle(
                             color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
                             fontFamily: 'Poppins',
@@ -177,9 +177,11 @@ class _ClassifierScreenState
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          const Text(
-                                            'Camera',
-                                            style: TextStyle(
+                                           Text(
+                                             AppLocalizations.of(
+                                                                context)!
+                                                            .camera,
+                                                        style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: 'Poppins',
                                             ),
@@ -231,9 +233,8 @@ class _ClassifierScreenState
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          const Text(
-                                            'Gallery',
-                                            style: TextStyle(
+                                           Text(
+                                            AppLocalizations.of(context)!.gallery,                                            style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: 'Poppins',
                                             ),
@@ -257,7 +258,7 @@ class _ClassifierScreenState
                           child: Row(
                             mainAxisAlignment:
                             MainAxisAlignment.center,
-                            children: const [
+                            children:  [
                               Icon(
                                 Icons.image_outlined,
                                 color: Colors.purple,
@@ -265,7 +266,7 @@ class _ClassifierScreenState
                               SizedBox(
                                 width: 8,
                               ),
-                              Text('CHOOSE IMAGE',
+                              Text(AppLocalizations.of(context)!.chose,
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w600,
@@ -284,7 +285,7 @@ class _ClassifierScreenState
                   child: defaultButton(
                     btnColor: PrimaryColor,
                     radius: 15,
-                    text: 'save result to the Gallery',
+                    text: AppLocalizations.of(context)!.saveresulttotheGallery,
                     onPressed: () async {
                       final imageee =
                       await controllerr.captureFromWidget(

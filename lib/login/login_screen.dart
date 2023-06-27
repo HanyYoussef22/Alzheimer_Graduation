@@ -12,7 +12,9 @@ import '../shard/network/local/cache_helper.dart';
 import '../shard/shared/components.dart';
 import '../shard/styles/Theme_Cubit.dart';
 import '../sign_up/register_screen.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -31,8 +33,8 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   formBackground(
                     isDark: BlocProvider.of<ThemeCubit>(context).state,
-                    welcomeTitle: 'Welcome again ,',
-                    welcomeHint: 'Login now and live the experience',
+                    welcomeTitle: AppLocalizations.of(context)!.hell,
+                    welcomeHint: AppLocalizations.of(context)!.loginnow,
                   ),
             Visibility(
               visible:BlocProvider.of<ThemeCubit>(context).state,
@@ -46,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:  [
-                    Text('Welcome again ,',
+                    Text(AppLocalizations.of(context)!.hell,
                       style:const  TextStyle(
                         color: Colors.white,
                         fontSize: 32,
@@ -55,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8,),
-                    Text('Login now and live the experience',
+                    Text(AppLocalizations.of(context)!.loginnow,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -111,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                                                         .spaceBetween,
                                                 children: [
                                                    Text(
-                                                    'LOGIN',
+                                                     AppLocalizations.of(context)!.login,
                                                     style: TextStyle(
                                                       color: BlocProvider.of<ThemeCubit>(context).state? Colors.grey:Colors.black,                                                      fontWeight:
                                                           FontWeight.w700,
@@ -138,7 +140,7 @@ class LoginScreen extends StatelessWidget {
                                                       );
                                                     },
                                                     child:  Text(
-                                                      'SIGN UP',
+                                                      AppLocalizations.of(context)!.signup,
                                                       style: TextStyle(
                                                         color: BlocProvider.of<ThemeCubit>(context).state? Colors.purple:Colors.grey,
                                                         fontWeight:
@@ -154,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                                               ),
                                               customField(
                                                 isDark: BlocProvider.of<ThemeCubit>(context).state,
-                                                name: 'Email',
+                                                name: AppLocalizations.of(context)!.email,
                                                 controller: emailController,
                                                 prefixIcon: Icons.email,
                                                 validate: (text) {
@@ -177,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                                               customField(
                                                   isDark: BlocProvider.of<ThemeCubit>(context).state,
                                                   controller: passController,
-                                                  name: 'Password',
+                                                  name: AppLocalizations.of(context)!.pass,
                                                   prefixIcon: Icons.lock,
                                                   validate: (text) {
                                                     if (text!.isEmpty ||
@@ -202,8 +204,8 @@ class LoginScreen extends StatelessWidget {
                                                               const ResetPasswordScreen()),
                                                     );
                                                   },
-                                                  child: const Text(
-                                                    'Forget Password?',
+                                                  child:  Text(
+                                                    AppLocalizations.of(context)!.fpasss,
                                                     style: TextStyle(
                                                       fontFamily: 'oxygen',
                                                       color: Colors.grey,
@@ -241,7 +243,7 @@ class LoginScreen extends StatelessWidget {
                                                         );
                                                       },
                                                       fallback: (context) {
-                                                        return const Row(
+                                                        return  Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .center,
@@ -252,7 +254,7 @@ class LoginScreen extends StatelessWidget {
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              'LOGIN',
+                                                              AppLocalizations.of(context)!.login,
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'Poppins',

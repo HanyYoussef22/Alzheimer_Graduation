@@ -33,8 +33,6 @@ class ShowHistory extends StatelessWidget {
             itemBuilder: (context, index) {
               if (snapshot.data!.exists) {
                 final url = imageUrlList[index];
-
-
                 return FutureBuilder<bool>(
                   future: checkImageURL(url),
                   builder: (BuildContext context,
@@ -44,7 +42,7 @@ class ShowHistory extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                              color: Colors.green,
+                              color: Colors.purple,
                               width: 2
                           ),
                           // shape: BoxShape.circle,
@@ -68,7 +66,7 @@ class ShowHistory extends StatelessWidget {
                             child: Slidable(
                               startActionPane: ActionPane(
 
-                                extentRatio: 0.20,
+                                extentRatio: 0.50,
                                 motion: StretchMotion(),
                                 children: [
                                   SlidableAction(
@@ -91,7 +89,7 @@ class ShowHistory extends StatelessWidget {
                               child: ClipRect(
                                   child: Align(
                                       alignment: Alignment.topCenter,
-                                      heightFactor: 0.35,
+                                      heightFactor: 0.40,
                                       child: Image.network(
                                         url ??
                                             'https://firebasestorage.googleapis.com/v0/b/alzahimer-ac621.appspot.com/o/userImages%2FHo4P7O6njFVW3h2rwkqi3MqlYKs1.png?alt=media&token=82b5873e-3b9e-4d22-886f-e102a08280b9',

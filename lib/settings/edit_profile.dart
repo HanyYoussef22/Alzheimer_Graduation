@@ -7,10 +7,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_broken/icon_broken.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Home_Layout/layout_cubit.dart';
 import '../Home_Layout/layout_states.dart';
 import '../Models/user.dart';
+import '../l10n/Localization_Cubit.dart';
 
 class EditProfileScreen extends StatelessWidget {
   TextEditingController nameController = TextEditingController();
@@ -29,10 +30,9 @@ class EditProfileScreen extends StatelessWidget {
         nameController.text = userModel!.fName;
 
         phoneController.text = userModel.phone ?? '';
-
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Edit Info'),
+            title:  Text(AppLocalizations.of(context)!.editInfo),
             actions: [
               TextButton(onPressed: (){
                 if(profileImage !=null) {
@@ -45,7 +45,7 @@ class EditProfileScreen extends StatelessWidget {
                   name: nameController.text,
                   phone: phoneController.text,
                 );
-              }, child: const Text('UPDATE', style: TextStyle(
+              }, child:  Text(AppLocalizations.of(context)!.update, style: TextStyle(
                   color: Colors.white
               ),)),
             ],
@@ -109,7 +109,7 @@ class EditProfileScreen extends StatelessWidget {
                       fontFamily: 'oxygen',
                       fontWeight: FontWeight.w500),
                   decoration:  InputDecoration(
-                    labelText: 'Phone',
+                    labelText: AppLocalizations.of(context)!.phone,
                     labelStyle: TextStyle(
                       color: BlocProvider.of<ThemeCubit>(context).state?Colors.grey:Colors.black, // Replace with your desired color
                     ),
@@ -127,7 +127,7 @@ class EditProfileScreen extends StatelessWidget {
                       fontFamily: 'oxygen',
                       fontWeight: FontWeight.w500),
                   decoration:  InputDecoration(
-                    labelText: 'Name',
+                    labelText: AppLocalizations.of(context)!.name,
                     labelStyle: TextStyle(
                       color: BlocProvider.of<ThemeCubit>(context).state?Colors.grey:Colors.black, // Replace with your desired color
                     ),
@@ -137,6 +137,19 @@ class EditProfileScreen extends StatelessWidget {
                       IconBroken.Profile,
                     ),
                   ),
+                ),
+
+                BlocBuilder<LanguageCubit, String>(
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        String newLanguageCode = BlocProvider.of<LanguageCubit>(context).state == 'ar' ? 'en' : 'ar';
+                        BlocProvider.of<LanguageCubit>(context).toggleLanguage(languageCode: newLanguageCode);
+                      },
+                      child: Text(BlocProvider.of<LanguageCubit>(context).state == 'ar' ? 'Change to English' : 'تغيير اللغة إلى العربية'),
+                    );
+
+                  },
                 ),
 
 

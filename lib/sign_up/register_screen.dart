@@ -10,8 +10,7 @@ import 'package:intl/intl.dart';
 import '../login/login_screen.dart';
 import '../shard/network/local/cache_helper.dart';
 import '../shard/shared/components.dart';
-import '../shard/styles/clors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -39,8 +38,8 @@ class RegisterScreen extends StatelessWidget {
                  children: [
                    formBackground(
                      isDark: BlocProvider.of<ThemeCubit>(context).state,
-                     welcomeHint: 'Register now and live the experience ..',
-                     welcomeTitle: 'Welcome',
+                     welcomeTitle: AppLocalizations.of(context)!.hell,
+                     welcomeHint: AppLocalizations.of(context)!.loginnow,
                    ),
                    Visibility(
                      visible:BlocProvider.of<ThemeCubit>(context).state,
@@ -49,12 +48,12 @@ class RegisterScreen extends StatelessWidget {
                        height: double.infinity,
                        padding: const EdgeInsets.symmetric(
                            horizontal: 20,
-                           vertical: 18
+                           vertical: 0
                        ),
                        child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children:  [
-                           Text('Welcome again ,',
+                           Text(AppLocalizations.of(context)!.hell,
                              style:const  TextStyle(
                                color: Colors.white,
                                fontSize: 32,
@@ -63,7 +62,7 @@ class RegisterScreen extends StatelessWidget {
                              ),
                            ),
                            const SizedBox(height: 8,),
-                           Text('Login now and live the experience',
+                           Text(AppLocalizations.of(context)!.loginnow,
                              style: const TextStyle(
                                color: Colors.white,
                                fontSize: 16,
@@ -120,17 +119,15 @@ class RegisterScreen extends StatelessWidget {
                                              );
                                            },
                                            child:  Text(
-                                             'LOGIN',
-                                             style: TextStyle(
+                                             AppLocalizations.of(context)!.login,                                             style: TextStyle(
                                                color: BlocProvider.of<ThemeCubit>(context).state? Colors.purple:Colors.grey,                                               fontWeight: FontWeight.w700,
                                                fontSize: 18,
                                              ),
                                            ),
                                          ),
-                                         const Text(
-                                           'SIGN UP',
-                                           style: TextStyle(
-                                             color: Colors.black,
+                                          Text(
+                                           AppLocalizations.of(context)!.signup,                                           style: TextStyle(
+                                             color: Colors.grey,
                                              fontWeight: FontWeight.w700,
                                              fontSize: 28,
                                            ),
@@ -141,8 +138,8 @@ class RegisterScreen extends StatelessWidget {
                                        height: 10,
                                      ),
                                      customField(
-                                       isDark: BlocProvider.of<ThemeCubit>(context).state,                                       name: 'Name',
-                                       prefixIcon: Icons.person,
+                                       isDark: BlocProvider.of<ThemeCubit>(context).state,
+                                       name: AppLocalizations.of(context)!.name,                                       prefixIcon: Icons.person,
                                        validate: (value) {
                                          if (value!.isEmpty) {
                                            return 'Please enter your name to sign up.';
@@ -156,7 +153,7 @@ class RegisterScreen extends StatelessWidget {
                                      ),
                                      customField(
                                        isDark: BlocProvider.of<ThemeCubit>(context).state,
-                                       name: 'Email',
+                                       name: AppLocalizations.of(context)!.email,
                                        prefixIcon: Icons.mail,
                                        validate: (value) {
                                          if (value!.isEmpty) {
@@ -175,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
                                      ),
                                      customField(
                                          isDark: BlocProvider.of<ThemeCubit>(context).state,
-                                         name: 'Birth',
+                                         name: AppLocalizations.of(context)!.birth,
                                          fieldTapping: (){
                                            showDatePicker(
                                              context: context,
@@ -197,7 +194,7 @@ class RegisterScreen extends StatelessWidget {
                                      customField(
                                        isDark: BlocProvider.of<ThemeCubit>(context).state,
                                        obsecureText: true,
-                                       name: 'Password',
+                                       name:AppLocalizations.of(context)!.pass,
                                        prefixIcon: Icons.lock,
                                        validate: (value) {
                                          if (value!.isEmpty) {
@@ -213,7 +210,7 @@ class RegisterScreen extends StatelessWidget {
                                      customField(
                                        isDark: BlocProvider.of<ThemeCubit>(context).state,
                                        obsecureText: true,
-                                       name: 'Confirm Password',
+                                       name: AppLocalizations.of(context)!.passon,
                                        prefixIcon: Icons.lock,
                                        validate: (value) {
                                          if (value != passController.text) {
@@ -259,15 +256,14 @@ class RegisterScreen extends StatelessWidget {
                                                  mainAxisAlignment:
                                                  MainAxisAlignment
                                                      .center,
-                                                 children: const [
+                                                 children:  [
                                                    Icon(Icons
                                                        .login_outlined),
                                                    SizedBox(
                                                      width: 10,
                                                    ),
                                                    Text(
-                                                     'REGISTER',
-                                                     style: TextStyle(
+                                                     AppLocalizations.of(context)!.register,                                                 style: TextStyle(
                                                        fontFamily:
                                                        'Poppins',
                                                        fontSize: 25,
