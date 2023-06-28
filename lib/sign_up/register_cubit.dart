@@ -29,10 +29,10 @@ class RegisterCubit extends Cubit<RegisterStates> {
       birthDate: birthDate,
       );
 
-      emit(RegisterSuccessState());
+      emit(RegisterSuccessState(value.user!.uid));
     }).catchError((error) {
       print(error.toString());
-      emit(RegisterFailureState());
+      emit(RegisterFailureState(error.toString()));
     });
   }
 

@@ -1,4 +1,6 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
+import 'package:alzahimer/Home_Layout/layout_cubit.dart';
+import 'package:alzahimer/Models/My_User.dart';
 import 'package:alzahimer/login/login_cubit.dart';
 import 'package:alzahimer/login/login_states.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -9,6 +11,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import '../modules/password_reset/password_reset.dart';
 import '../shard/login_handle.dart';
 import '../shard/network/local/cache_helper.dart';
+import '../shard/network/remote/datdbase/database_utils.dart';
 import '../shard/shared/components.dart';
 import '../shard/styles/Theme_Cubit.dart';
 import '../sign_up/register_screen.dart';
@@ -222,6 +225,8 @@ class LoginScreen extends StatelessWidget {
                                                 width: double.infinity,
                                                 child: ElevatedButton(
                                                     onPressed: () {
+                                                      if (formKey.currentState!.validate()) {
+
                                                       LoginCubit.get(context)
                                                           .userLogin(
                                                               email:
@@ -230,7 +235,7 @@ class LoginScreen extends StatelessWidget {
                                                               password:
                                                                   passController
                                                                       .text);
-                                                    },
+                                                    }},
                                                     child: ConditionalBuilder(
                                                       builder: (context) {
                                                         return const SizedBox(
@@ -299,7 +304,10 @@ class LoginScreen extends StatelessWidget {
         },
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            CacheHelper.saveData(key: 'signed', value: true).then((value) {
+            CacheHelper.saveData(key: 'signed', value: true).then((value) async {
+              var Cubit=BlocProvider.of<LayoutCubit>(context);
+              var user= await DataBaseUtil.readUser(state.ui);
+              Cubit.model=user;
               Navigator.pushNamed(context, HomeLayout.roudeName);
             });
           }

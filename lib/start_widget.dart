@@ -5,7 +5,7 @@ import 'package:alzahimer/shard/network/local/cache_helper.dart';
 import 'package:flutter/material.dart';
 
 Widget startWidget () {
-  if(CacheHelper.getData('signed') == null) {
+  if(CacheHelper.getData('signed') == null ) {
     return LoginScreen();
   }
   return  HomeLayout();

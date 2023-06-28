@@ -309,11 +309,8 @@ class Profile extends StatelessWidget {
                             imageColor: Colors.red,
                             text: AppLocalizations.of(context)!.logout,
                             image: AppImages.logout,
-                            function: () {
-                              cubit.model?.email.isEmpty;
-                              cubit.model?.birthDate?.isEmpty;
-                              cubit.model?.fName.isEmpty;
-                              cubit.model?.image?.isEmpty;
+                            function: () async {
+                              await BlocProvider.of<LayoutCubit>(context).logout();
                               CacheHelper.removeData('signed').then((value) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {

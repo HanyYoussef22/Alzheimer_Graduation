@@ -18,6 +18,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   static LayoutCubit get(context) => BlocProvider.of(context);
   MyUser? model;
+  User? FirebaseUser;
 
 
   void getUserData() async {
@@ -39,8 +40,20 @@ class LayoutCubit extends Cubit<LayoutStates> {
       emit(GetUserErrorState());
     });
   }
+  Future<void> logout()
+  async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      FirebaseUser = FirebaseAuth.instance.currentUser;
+      print('Log out YeSSSSSSSSS');
+    } catch (e) {
+      // An error occurred while trying to sign out the user.
+      print('Failed to sign out user: $e');
+    }
+  }
 
   File? profileImage;
+
 
   ImagePicker picker = ImagePicker();
 
