@@ -8,10 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_broken/icon_broken.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../Home_Layout/layout_cubit.dart';
-import '../Home_Layout/layout_states.dart';
-import '../Models/user.dart';
-import '../l10n/Localization_Cubit.dart';
+
+import '../../Home_Layout/layout_cubit.dart';
+import '../../Home_Layout/layout_states.dart';
+import '../../l10n/Localization_Cubit.dart';
+
 
 class EditProfileScreen extends StatelessWidget {
   TextEditingController nameController = TextEditingController();

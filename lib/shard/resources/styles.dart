@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:alzahimer/resources/app_colors.dart';
+
+import 'app_colors.dart';
 
 class Styles {
   static const poppinsFont = 'Poppins';

@@ -7,15 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_broken/icon_broken.dart';
-
 import '../article_screen/articles/articles_screen.dart';
-
-// import '../home.dart';
-import '../home.dart';
 import '../modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
 import '../modules/Classifier/hoistry/hoistry.dart';
-import '../modules/profile/profile_Screen.dart';
-import '../profile/profile_screen.dart';
+import '../modules/profile/profile_screen.dart';
 import 'layout_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'layout_states.dart';
@@ -23,6 +18,8 @@ import 'layout_states.dart';
 class HomeLayout extends StatefulWidget {
   static const String roudeName = 'HomeLayout';
   int currentIndex = 0;
+
+  HomeLayout({super.key});
 
   @override
   State<HomeLayout> createState() => _HomeLayoutState();
@@ -248,7 +245,10 @@ class _HomeLayoutState extends BaseState<HomeLayout, HomeLayoutViewModel>
                 currentIndex = 0;
                 // currentPage =  ClassifierScreen();
               });
-              Navigator.pushNamed(context, HomeLayout.roudeName);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomeLayout()),
+              );
             },
           ),
         );

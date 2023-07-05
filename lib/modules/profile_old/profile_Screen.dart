@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:alzahimer/Models/My_User.dart';
-import 'package:alzahimer/login/login_screen.dart';import 'package:alzahimer/modules/profile/change_PassWored.dart';
 import 'package:alzahimer/shard/network/remote/datdbase/database_utils.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../shard/Provider/user_Provider.dart';
+import 'change_PassWored.dart';
 import 'change_name.dart';
 
 class ProfileScreen extends StatefulWidget {

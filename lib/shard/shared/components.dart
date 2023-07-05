@@ -1,5 +1,6 @@
-import 'package:alzahimer/resources/app_images.dart';
 import 'package:flutter/material.dart';
+
+import '../resources/app_images.dart';
 
 Widget submitButton({
   required String submitText,

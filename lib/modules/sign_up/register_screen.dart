@@ -1,17 +1,17 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
+import 'package:alzahimer/modules/sign_up/register_cubit.dart';
+import 'package:alzahimer/modules/sign_up/register_state.dart';
 import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
-import 'package:alzahimer/sign_up/register_cubit.dart';
-import 'package:alzahimer/sign_up/register_state.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:intl/intl.dart';
-import '../Home_Layout/layout_cubit.dart';
+import '../../Home_Layout/layout_cubit.dart';
+import '../../shard/network/local/cache_helper.dart';
+import '../../shard/network/remote/datdbase/database_utils.dart';
+import '../../shard/shared/components.dart';
 import '../login/login_screen.dart';
-import '../shard/network/local/cache_helper.dart';
-import '../shard/network/remote/datdbase/database_utils.dart';
-import '../shard/shared/components.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RegisterScreen extends StatelessWidget {
@@ -306,79 +306,46 @@ class RegisterScreen extends StatelessWidget {
             var Cubit=BlocProvider.of<LayoutCubit>(context);
             var user= await DataBaseUtil.readUser(state.ui);
             Cubit.model=user;
-            Navigator.pushNamed(context, HomeLayout.roudeName);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomeLayout()),
+            );
           });
 
         }
-           if (state is RegisterFailureState) {
-             if (state.error == 'weak-password') {
-               AwesomeDialog(
-                   btnOkColor: Colors.indigoAccent,
-                   context: context,
-                   dialogType: DialogType.error,
-                   borderSide: const BorderSide(
-                     color: Colors.redAccent,
-                     width: 2,
-                   ),
-                   width: 590,
-                   buttonsBorderRadius: const BorderRadius.all(
-                     Radius.circular(2),
-                   ),
-                   dismissOnTouchOutside: true,
-                   dismissOnBackKeyPress: false,
-                   buttonsTextStyle:
-                   const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
-                   headerAnimationLoop: false,
-                   animType: AnimType.bottomSlide,
-                   title: 'weak password',
-                   titleTextStyle: const TextStyle(
-                     fontSize: 17,
-                     fontFamily: 'oxygen',
-                     fontWeight: FontWeight.w700,
-                   ),
-                   descTextStyle:
-                   const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                   desc:
-                   'The password provided is too weak.',
-                   showCloseIcon: true,
-                   btnOkOnPress: () {},
-                   btnOkText: 'OK')
-                   .show();
-             }
-             if (state.error == 'email-already-in-use') {
-               AwesomeDialog(
-                   btnOkColor: Colors.indigoAccent,
-                   context: context,
-                   dialogType: DialogType.error,
-                   borderSide: const BorderSide(
-                     color: Colors.redAccent,
-                     width: 2,
-                   ),
-                   width: 590,
-                   buttonsBorderRadius: const BorderRadius.all(
-                     Radius.circular(2),
-                   ),
-                   dismissOnTouchOutside: true,
-                   dismissOnBackKeyPress: false,
-                   buttonsTextStyle:
-                   const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
-                   headerAnimationLoop: false,
-                   animType: AnimType.bottomSlide,
-                   title: 'email already in use',
-                   titleTextStyle: const TextStyle(
-                     fontSize: 17,
-                     fontFamily: 'oxygen',
-                     fontWeight: FontWeight.w700,
-                   ),
-                   descTextStyle:
-                   const TextStyle(fontFamily: 'oxygen', fontSize: 15),
-                   desc:
-                   'The account already exists for that emailThe account already exists for that email',
-                   showCloseIcon: true,
-                   btnOkOnPress: () {},
-                   btnOkText: 'OK')
-                   .show();
-             }
+           else if (state is RegisterFailureState) {
+             AwesomeDialog(
+                 btnOkColor: Colors.indigoAccent,
+                 context: context,
+                 dialogType: DialogType.error,
+                 borderSide: const BorderSide(
+                   color: Colors.redAccent,
+                   width: 2,
+                 ),
+                 width: 590,
+                 buttonsBorderRadius: const BorderRadius.all(
+                   Radius.circular(2),
+                 ),
+                 dismissOnTouchOutside: true,
+                 dismissOnBackKeyPress: false,
+                 buttonsTextStyle:
+                 const TextStyle(fontSize: 17, fontFamily: 'Poppins'),
+                 headerAnimationLoop: false,
+                 animType: AnimType.bottomSlide,
+                 title: 'try again',
+                 titleTextStyle: const TextStyle(
+                   fontSize: 17,
+                   fontFamily: 'oxygen',
+                   fontWeight: FontWeight.w700,
+                 ),
+                 descTextStyle:
+                 const TextStyle(fontFamily: 'oxygen', fontSize: 15),
+                 desc:
+                 state.error,
+                 showCloseIcon: true,
+                 btnOkOnPress: () {},
+                 btnOkText: 'OK')
+                 .show();
 
            }
 

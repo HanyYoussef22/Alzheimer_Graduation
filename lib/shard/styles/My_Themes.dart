@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'clors.dart';
-
 class MyThemeData {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'Poppins',
@@ -72,12 +70,6 @@ class MyThemeData {
       iconTheme: IconThemeData(color: WhiteColor),
 
     ),
-
-
-
-
-
-
     floatingActionButtonTheme:
         FloatingActionButtonThemeData(backgroundColor: PrimaryColor),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent),

@@ -1,23 +1,21 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
 import 'package:alzahimer/Home_Layout/layout_cubit.dart';
-import 'package:alzahimer/Models/My_User.dart';
-import 'package:alzahimer/login/login_cubit.dart';
-import 'package:alzahimer/login/login_states.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import '../modules/password_reset/password_reset.dart';
-import '../shard/login_handle.dart';
-import '../shard/network/local/cache_helper.dart';
-import '../shard/network/remote/datdbase/database_utils.dart';
-import '../shard/shared/components.dart';
-import '../shard/styles/Theme_Cubit.dart';
+import '../../shard/login_handle.dart';
+import '../../shard/network/local/cache_helper.dart';
+import '../../shard/network/remote/datdbase/database_utils.dart';
+import '../../shard/shared/components.dart';
+import '../../shard/styles/Theme_Cubit.dart';
+import '../password_reset/password_reset.dart';
 import '../sign_up/register_screen.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'login_cubit.dart';
+import 'login_states.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -308,7 +306,10 @@ class LoginScreen extends StatelessWidget {
               var Cubit=BlocProvider.of<LayoutCubit>(context);
               var user= await DataBaseUtil.readUser(state.ui);
               Cubit.model=user;
-              Navigator.pushNamed(context, HomeLayout.roudeName);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomeLayout()),
+              );
             });
           }
           if (state is LoginFailureState) {

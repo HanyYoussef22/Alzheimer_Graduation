@@ -1,10 +1,9 @@
 import 'package:alzahimer/Models/My_User.dart';
-import 'package:alzahimer/sign_up/register_state.dart';
+import 'package:alzahimer/modules/sign_up/register_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import '../Models/user.dart';
 
 class RegisterCubit extends Cubit<RegisterStates> {
 
@@ -32,7 +31,15 @@ class RegisterCubit extends Cubit<RegisterStates> {
       emit(RegisterSuccessState(value.user!.uid));
     }).catchError((error) {
       print(error.toString());
-      emit(RegisterFailureState(error.toString()));
+      if (error.code == 'weak-password') {
+        emit(RegisterFailureState('The password is too weak.'));
+      } else if (error.code == 'email-already-in-use') {
+        emit(RegisterFailureState('The email address is already in use.'));
+      } else if (error.code == 'invalid-email') {
+        emit(RegisterFailureState('The email address is invalid.'));
+      } else {
+        emit(RegisterFailureState('An error occurred during registration.'));
+      }
     });
   }
 

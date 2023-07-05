@@ -23,7 +23,6 @@ import 'package:screenshot/screenshot.dart';
 import 'package:tflite/tflite.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../../resources/app_colors.dart';
 import '../../../shard/styles/clors.dart';
 import '../ResuiltScreen/ResultScreen.dart';
 import 'package:firebase_storage/firebase_storage.dart';

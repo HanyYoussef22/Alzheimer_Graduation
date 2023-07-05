@@ -1,7 +1,6 @@
 
 import 'package:alzahimer/Home_Layout/layout_cubit.dart';
 import 'package:alzahimer/Home_Layout/layout_states.dart';
-import 'package:alzahimer/settings/edit_profile.dart';
 import 'package:alzahimer/shard/network/remote/datdbase/database_utils.dart';
 import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -9,11 +8,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../l10n/Localization_Cubit.dart';
+import '../../shard/components/custom_row.dart';
+import '../../shard/network/local/cache_helper.dart';
+import '../../shard/resources/app_images.dart';
 import '../login/login_screen.dart';
-import '../resources/app_images.dart';
-import '../shard/components/custom_row.dart';
-import '../shard/network/local/cache_helper.dart';
+import '../settings/edit_profile.dart';
+
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -312,10 +312,10 @@ class Profile extends StatelessWidget {
                             function: () async {
                               await BlocProvider.of<LayoutCubit>(context).logout();
                               CacheHelper.removeData('signed').then((value) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return const LoginScreen();
-                                    }));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                                );
                               });
                             },
                           ),

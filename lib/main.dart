@@ -17,11 +17,12 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'article_screen/articles/single_article_screen.dart';
 import 'modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
-import 'modules/profile/change_PassWored.dart';
-import 'modules/profile/change_name.dart';
-import 'modules/profile/profile_Screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'modules/profile_old/change_PassWored.dart';
+import 'modules/profile_old/change_name.dart';
+import 'modules/profile_old/profile_Screen.dart';
 
 // ChangeNotifierProvider<AppProvider>(create: (c) => AppProvider()
 void main() async {
