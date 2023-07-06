@@ -1,7 +1,6 @@
 import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_Navigetor.dart';
 import 'package:alzahimer/Home_Layout/Home_Layout_ViewModel.dart';
-import 'package:alzahimer/Home_Layout/test.dart';
 import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
