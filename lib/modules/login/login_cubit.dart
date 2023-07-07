@@ -23,7 +23,8 @@ class LoginCubit extends Cubit<LoginStates> {
         print(value.user!.email);
       }
       emit(LoginSuccessState(value.user!.uid));
-    }).catchError((error) {
+    }
+    ).catchError((error) {
       emit(LoginFailureState(error.toString()));
       if (kDebugMode) {
         print("error => $error");

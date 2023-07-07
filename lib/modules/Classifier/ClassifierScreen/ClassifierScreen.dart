@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image/image.dart' as img; // added import for ImageByteFormat
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 
@@ -75,260 +74,270 @@ class _ClassifierScreenState
         body: _loading
             ? Loading()
             : Container(
-          alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _image == null
-                    ? Column(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        child: Lottie.asset('assets/3.json'),
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.classify,
-                        style: TextStyle(
-                            color: BlocProvider.of<ThemeCubit>(context).state ?Colors.grey:Colors.black,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 25),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(15),
-                                    topLeft: Radius.circular(15)),
-                              ),
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    const BorderRadius.only(
-                                        topRight:
-                                        Radius.circular(15),
-                                        topLeft:
-                                        Radius.circular(
-                                            15)),
-                                    color: Colors.purple
-                                        .withOpacity(0.9),
+                      _image == null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                  Container(
+                                    child: Lottie.asset('assets/3.json'),
                                   ),
-                                  height: MediaQuery.of(context)
-                                      .size
-                                      .height *
-                                      .22,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        mainAxisSize:
-                                        MainAxisSize.min,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .center,
-                                        children: [
-                                          Container(
-                                            decoration:
-                                            const BoxDecoration(
-                                              border:
-                                              GradientBoxBorder(
-                                                gradient:
-                                                LinearGradient(
-                                                    colors: [
-                                                      Colors.blue,
-                                                      Colors.red,
-                                                      Colors.blue,
-                                                      Colors.red,
-                                                    ]),
-                                                width: 2,
-                                              ),
-                                              shape:
-                                              BoxShape.circle,
-                                            ),
-                                            height: 65,
-                                            width: 65,
-                                            child: IconButton(
-                                              alignment:
-                                              Alignment.center,
-                                              onPressed: () {
-                                                takeImage();
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              icon: const Icon(
-                                                Icons.camera_alt,
-                                                color: Colors.white,
-                                                size: 35,
-                                              ),
-                                            ),
+                                  Text(
+                                    AppLocalizations.of(context)!.classify,
+                                    style: TextStyle(
+                                        color:
+                                            BlocProvider.of<ThemeCubit>(context)
+                                                    .state
+                                                ? Colors.grey
+                                                : Colors.black,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 25),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(15),
+                                                topLeft: Radius.circular(15)),
                                           ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                           Text(
-                                             AppLocalizations.of(
+                                          context: context,
+                                          builder: (context) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(15),
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                15)),
+                                                color: Colors.purple
+                                                    .withOpacity(0.9),
+                                              ),
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  .22,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          border:
+                                                              GradientBoxBorder(
+                                                            gradient:
+                                                                LinearGradient(
+                                                                    colors: [
+                                                                  Colors.blue,
+                                                                  Colors.red,
+                                                                  Colors.blue,
+                                                                  Colors.red,
+                                                                ]),
+                                                            width: 2,
+                                                          ),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        height: 65,
+                                                        width: 65,
+                                                        child: IconButton(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          onPressed: () {
+                                                            takeImage();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.camera_alt,
+                                                            color: Colors.white,
+                                                            size: 35,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        AppLocalizations.of(
                                                                 context)!
                                                             .camera,
                                                         style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins',
-                                            ),
-                                          ),
-                                        ],
+                                                          color: Colors.white,
+                                                          fontFamily: 'Poppins',
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 80,
+                                                  ),
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          border:
+                                                              GradientBoxBorder(
+                                                            gradient:
+                                                                LinearGradient(
+                                                                    colors: [
+                                                                  Colors.blue,
+                                                                  Colors.red,
+                                                                  Colors.blue,
+                                                                  Colors.red,
+                                                                ]),
+                                                            width: 2,
+                                                          ),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        height: 65,
+                                                        width: 65,
+                                                        child: IconButton(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          onPressed: () {
+                                                            pickImage();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.image,
+                                                            color: Colors.white,
+                                                            size: 35,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Text(
+                                                        AppLocalizations.of(
+                                                                context)!
+                                                            .gallery,
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontFamily: 'Poppins',
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          .80,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.purple, width: 3),
                                       ),
-                                      const SizedBox(
-                                        width: 80,
-                                      ),
-                                      Column(
-                                        mainAxisSize:
-                                        MainAxisSize.min,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            decoration:
-                                            const BoxDecoration(
-                                              border:
-                                              GradientBoxBorder(
-                                                gradient:
-                                                LinearGradient(
-                                                    colors: [
-                                                      Colors.blue,
-                                                      Colors.red,
-                                                      Colors.blue,
-                                                      Colors.red,
-                                                    ]),
-                                                width: 2,
-                                              ),
-                                              shape:
-                                              BoxShape.circle,
-                                            ),
-                                            height: 65,
-                                            width: 65,
-                                            child: IconButton(
-                                              alignment:
-                                              Alignment.center,
-                                              onPressed: () {
-                                                pickImage();
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              icon: const Icon(
-                                                Icons.image,
-                                                color: Colors.white,
-                                                size: 35,
-                                              ),
-                                            ),
+                                          Icon(
+                                            Icons.image_outlined,
+                                            color: Colors.purple,
                                           ),
-                                          const SizedBox(
-                                            height: 10,
+                                          SizedBox(
+                                            width: 8,
                                           ),
-                                           Text(
-                                            AppLocalizations.of(context)!.gallery,                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins',
-                                            ),
-                                          )
+                                          Text(
+                                              AppLocalizations.of(context)!
+                                                  .chose,
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.purple))
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width *
-                              .80,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Colors.purple, width: 3),
-                          ),
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.center,
-                            children:  [
-                              Icon(
-                                Icons.image_outlined,
-                                color: Colors.purple,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(AppLocalizations.of(context)!.chose,
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.purple))
-                            ],
-                          ),
-                        ),
-                      )
-                    ])
-                    : result1(_image!, _outputs),
+                                    ),
+                                  )
+                                ])
+                          : result1(_image!, _outputs),
 
-                _image == null
-                    ? Container()
-                    : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: defaultButton(
-                    btnColor: PrimaryColor,
-                    radius: 15,
-                    text: AppLocalizations.of(context)!.saveresulttotheGallery,
-                    onPressed: () async {
-                      final imageee =
-                      await controllerr.captureFromWidget(
-                          result1(_image!, _outputs));
-                      if (imageee == null) return;
-                      await save(imageee);
-                    },
+                      _image == null
+                          ? Container()
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: defaultButton(
+                                btnColor: PrimaryColor,
+                                radius: 15,
+                                text: AppLocalizations.of(context)!
+                                    .saveresulttotheGallery,
+                                onPressed: () async {
+                                  final imageee =
+                                      await controllerr.captureFromWidget(
+                                          result1(_image!, _outputs));
+                                  if (imageee == null) return;
+                                  await save(imageee);
+                                },
+                              ),
+                            ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _image == null
+                          ? Container()
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: defaultButton(
+                                btnColor: PrimaryColor,
+                                radius: 15,
+                                text: 'save result to the Cloud',
+                                onPressed: () async {
+                                  final imageee =
+                                      await controllerr.captureFromWidget(
+                                          result1(_image!, _outputs));
+                                  if (imageee == null) return;
+                                  // await save(imageee);
+
+                                  await uploadImage(imageee);
+                                },
+                              ),
+                            ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // _image == null
+                      //     ? Container()
+                      //     : const Text(
+                      //   ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
+                      //   style: TextStyle(color: Colors.red, fontSize: 20),
+                      // ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _image == null
-                    ? Container()
-                    : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: defaultButton(
-                    btnColor: PrimaryColor,
-                    radius: 15,
-                    text: 'save result to the Cloud',
-                    onPressed: () async {
-                      final imageee =
-                      await controllerr.captureFromWidget(
-                          result1(_image!, _outputs));
-                      if (imageee == null) return;
-                      // await save(imageee);
-
-                      await uploadImage(imageee);
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // _image == null
-                //     ? Container()
-                //     : const Text(
-                //   ' Warning: this result may not accurate so you need to consulting a doctor as soon as possible(The accuracy of the results is 91%)',
-                //   style: TextStyle(color: Colors.red, fontSize: 20),
-                // ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }
@@ -431,33 +440,4 @@ class _ClassifierScreenState
       'listimageurl': FieldValue.arrayUnion([url]),
     });
   }
-
-// uploudeimage(){
-//   // var ref= FirebaseFirestore.instance.ref('images/');
-//
-// }
-
-// Future<void> uploadImage(Uint8List imageBytes) async {
-//   final user = FirebaseAuth.instance.currentUser;
-//   final id = user!.uid;
-//
-//   // Convert the Uint8List to an Image
-//   final image = await decodeImageFromList(imageBytes);
-//
-//   // Create a new file in temporary directory and write the image bytes to it
-//   final tempDir = await getTemporaryDirectory();
-//   final file = await new File('${tempDir.path}/$id.png').create();
-//   final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
-//   await file.writeAsBytes(bytes!.buffer.asUint8List());
-//
-//   // Upload the file to Firebase Storage
-//   final ref = FirebaseStorage.instance.ref('userImages/$id.png');
-//   await ref.putFile(file);
-//
-//   // Get the download URL and update the user's profile
-//   final url = await ref.getDownloadURL();
-//   await FirebaseFirestore.instance.collection(MyUser.CollecationName).doc(id).update({
-//     'imageurl': url,
-//   });
-// }
 }

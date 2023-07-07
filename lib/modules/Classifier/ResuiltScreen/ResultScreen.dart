@@ -50,7 +50,7 @@ class ResultScreen extends StatelessWidget {
           Text(
             "${confidence(_outputs![0]["confidence"] * 100)} %",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.red,
               fontSize: 18.0,
               background: Paint()..color = Colors.transparent,
             ),
