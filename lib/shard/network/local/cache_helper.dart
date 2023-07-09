@@ -11,6 +11,15 @@ class CacheHelper {
     return sharedPreferences!.get(key);
   }
 
+  static dynamic getString(String key) {
+    return sharedPreferences!.getString(key);
+  }
+
+  static Future<bool> saveString(
+      {required String key, required String value}) async {
+    return await sharedPreferences!.setString(key, value);
+  }
+
   static Future<bool> saveData(
       {required String key, required dynamic value}) async {
     if (value is String) return await sharedPreferences!.setString(key, value);

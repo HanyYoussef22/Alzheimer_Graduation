@@ -1,10 +1,12 @@
 import 'package:alzahimer/Home_Layout/Home_Layout.dart';
 import 'package:alzahimer/Home_Layout/layout_cubit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
 import '../../shard/login_handle.dart';
 import '../../shard/network/local/cache_helper.dart';
 import '../../shard/network/remote/datdbase/database_utils.dart';
@@ -12,10 +14,9 @@ import '../../shard/shared/components.dart';
 import '../../shard/styles/Theme_Cubit.dart';
 import '../password_reset/password_reset.dart';
 import '../sign_up/register_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'login_cubit.dart';
 import 'login_states.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -37,40 +38,41 @@ class LoginScreen extends StatelessWidget {
                     welcomeTitle: AppLocalizations.of(context)!.hell,
                     welcomeHint: AppLocalizations.of(context)!.loginnow,
                   ),
-            Visibility(
-              visible:BlocProvider.of<ThemeCubit>(context).state,
-              child:Container(
-                width: double.infinity,
-                height: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 35
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
-                    Text(AppLocalizations.of(context)!.hell,
-                      style:const  TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
+                  Visibility(
+                    visible: BlocProvider.of<ThemeCubit>(context).state,
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 35),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.hell,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.loginnow,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8,),
-                    Text(AppLocalizations.of(context)!.loginnow,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-
+                  ),
                   layoutForm(
                     Column(
                       children: [
@@ -86,13 +88,17 @@ class LoginScreen extends StatelessWidget {
                               Center(
                                 child: Card(
                                   elevation: 10,
-
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(11),
                                   ),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: BlocProvider.of<ThemeCubit>(context).state? Color(0xFF141922):Colors.white,                                      borderRadius: BorderRadius.circular(10),
+                                      color:
+                                          BlocProvider.of<ThemeCubit>(context)
+                                                  .state
+                                              ? Color(0xFF141922)
+                                              : Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                     // height: MediaQuery.of(context).size.height *
                                     //     0.45,
@@ -113,10 +119,18 @@ class LoginScreen extends StatelessWidget {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                   Text(
-                                                     AppLocalizations.of(context)!.login,
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .login,
                                                     style: TextStyle(
-                                                      color: BlocProvider.of<ThemeCubit>(context).state? Colors.grey:Colors.black,                                                      fontWeight:
+                                                      color: BlocProvider.of<
+                                                                      ThemeCubit>(
+                                                                  context)
+                                                              .state
+                                                          ? Colors.grey
+                                                          : Colors.black,
+                                                      fontWeight:
                                                           FontWeight.w700,
                                                       fontSize: 30,
                                                     ),
@@ -140,10 +154,17 @@ class LoginScreen extends StatelessWidget {
                                                         ),
                                                       );
                                                     },
-                                                    child:  Text(
-                                                      AppLocalizations.of(context)!.signup,
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .signup,
                                                       style: TextStyle(
-                                                        color: BlocProvider.of<ThemeCubit>(context).state? Colors.purple:Colors.grey,
+                                                        color: BlocProvider.of<
+                                                                        ThemeCubit>(
+                                                                    context)
+                                                                .state
+                                                            ? Colors.purple
+                                                            : Colors.grey,
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontSize: 18,
@@ -156,8 +177,13 @@ class LoginScreen extends StatelessWidget {
                                                 height: 12,
                                               ),
                                               customField(
-                                                isDark: BlocProvider.of<ThemeCubit>(context).state,
-                                                name: AppLocalizations.of(context)!.email,
+                                                isDark:
+                                                    BlocProvider.of<ThemeCubit>(
+                                                            context)
+                                                        .state,
+                                                name: AppLocalizations.of(
+                                                        context)!
+                                                    .email,
                                                 controller: emailController,
                                                 prefixIcon: Icons.email,
                                                 validate: (text) {
@@ -178,9 +204,13 @@ class LoginScreen extends StatelessWidget {
                                                 height: 20,
                                               ),
                                               customField(
-                                                  isDark: BlocProvider.of<ThemeCubit>(context).state,
+                                                  isDark: BlocProvider.of<
+                                                          ThemeCubit>(context)
+                                                      .state,
                                                   controller: passController,
-                                                  name: AppLocalizations.of(context)!.pass,
+                                                  name: AppLocalizations.of(
+                                                          context)!
+                                                      .pass,
                                                   prefixIcon: Icons.lock,
                                                   validate: (text) {
                                                     if (text!.isEmpty ||
@@ -205,8 +235,10 @@ class LoginScreen extends StatelessWidget {
                                                               const ResetPasswordScreen()),
                                                     );
                                                   },
-                                                  child:  Text(
-                                                    AppLocalizations.of(context)!.fpasss,
+                                                  child: Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .fpasss,
                                                     style: TextStyle(
                                                       fontFamily: 'oxygen',
                                                       color: Colors.grey,
@@ -223,17 +255,18 @@ class LoginScreen extends StatelessWidget {
                                                 width: double.infinity,
                                                 child: ElevatedButton(
                                                     onPressed: () {
-                                                      if (formKey.currentState!.validate()) {
-
-                                                      LoginCubit.get(context)
-                                                          .userLogin(
-                                                              email:
-                                                                  emailController
-                                                                      .text,
-                                                              password:
-                                                                  passController
-                                                                      .text);
-                                                    }},
+                                                      if (formKey.currentState!
+                                                          .validate()) {
+                                                        LoginCubit.get(context)
+                                                            .userLogin(
+                                                                email:
+                                                                    emailController
+                                                                        .text,
+                                                                password:
+                                                                    passController
+                                                                        .text);
+                                                      }
+                                                    },
                                                     child: ConditionalBuilder(
                                                       builder: (context) {
                                                         return const SizedBox(
@@ -246,7 +279,7 @@ class LoginScreen extends StatelessWidget {
                                                         );
                                                       },
                                                       fallback: (context) {
-                                                        return  Row(
+                                                        return Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .center,
@@ -257,7 +290,9 @@ class LoginScreen extends StatelessWidget {
                                                               width: 10,
                                                             ),
                                                             Text(
-                                                              AppLocalizations.of(context)!.login,
+                                                              AppLocalizations.of(
+                                                                      context)!
+                                                                  .login,
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'Poppins',
@@ -302,10 +337,11 @@ class LoginScreen extends StatelessWidget {
         },
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            CacheHelper.saveData(key: 'signed', value: true).then((value) async {
-              var Cubit=BlocProvider.of<LayoutCubit>(context);
-              var user= await DataBaseUtil.readUser(state.ui);
-              Cubit.model=user;
+            CacheHelper.saveString(key: 'signed', value: 'signed ok')
+                .then((value) async {
+              var cubit = BlocProvider.of<LayoutCubit>(context);
+              var user = await DataBaseUtil.readUser(state.ui);
+              cubit.model = user;
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomeLayout()),

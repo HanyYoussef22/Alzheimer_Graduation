@@ -1,31 +1,32 @@
-import 'dart:typed_data';
-import 'dart:ui';
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 
 import 'package:alzahimer/Base.dart';
 import 'package:alzahimer/Models/My_User.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierNavigetor.dart';
 import 'package:alzahimer/modules/Classifier/ClassifierScreen/ClassifierViewModel.dart';
 import 'package:alzahimer/shard/components/components.dart';
+import 'package:alzahimer/shard/styles/Theme_Cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
+// import 'package:screenshot/screenshot.dart';
+// import 'package:screenshot/screenshot.dart';
 import 'package:tflite/tflite.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:path_provider/path_provider.dart';
+
 import '../../../shard/styles/clors.dart';
 import '../ResuiltScreen/ResultScreen.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-
 import 'loadingScreen/Loading.dart';
 
 class ClassifierScreen extends StatefulWidget {
@@ -64,7 +65,7 @@ class _ClassifierScreenState
   }
 
   final ImagePicker _picker = ImagePicker();
-  final controllerr = ScreenshotController();
+  ScreenshotController controllerr = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,6 @@ import 'package:alzahimer/Home_Layout/layout_cubit.dart';
 import 'package:alzahimer/l10n/Localization_Cubit.dart';
 import 'package:alzahimer/modules/Classifier/hoistry/hoistry.dart';
 import 'package:alzahimer/shard/Provider/app_provider.dart';
-import 'package:alzahimer/shard/Provider/user_Provider.dart';
 import 'package:alzahimer/shard/bloc_observer.dart';
 import 'package:alzahimer/shard/network/local/cache_helper.dart';
 import 'package:alzahimer/shard/styles/My_Themes.dart';
@@ -12,14 +11,14 @@ import 'package:alzahimer/start_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+
 import 'article_screen/articles/single_article_screen.dart';
 import 'modules/Classifier/ClassifierScreen/ClassifierScreen.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'modules/profile_old/change_PassWored.dart';
 import 'modules/profile_old/change_name.dart';
 import 'modules/profile_old/profile_Screen.dart';
@@ -33,6 +32,7 @@ void main() async {
   await Firebase.initializeApp();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
+  print(CacheHelper.getData('signed'));
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<AppProvider>(create: (c) => AppProvider()),
@@ -52,12 +52,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<LanguageCubit>(
           create: (context) => LanguageCubit(),
         ),
-
         BlocProvider(
-          create: (context) =>
-          LayoutCubit()
-            ..getUserData(),
-
+          create: (context) => LayoutCubit()..getUserData(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, bool>(
@@ -65,7 +61,7 @@ class MyApp extends StatelessWidget {
           return BlocBuilder<LanguageCubit, String>(
             builder: (context, LanguageState) {
               return MaterialApp(
-                localizationsDelegates: [
+                localizationsDelegates: const [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
@@ -76,7 +72,6 @@ class MyApp extends StatelessWidget {
                   Locale('ar'), // Spanish
                 ],
                 locale: Locale('$LanguageState'),
-
                 routes: {
                   ClassifierScreen.roudeName: (c) => ClassifierScreen(),
                   HomeLayout.roudeName: (c) => HomeLayout(),
