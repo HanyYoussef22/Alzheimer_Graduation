@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shard/components/custom_row.dart';
 import '../../shard/network/local/cache_helper.dart';
 import '../../shard/resources/app_images.dart';
+import '../Classifier/hoistry/hoistry.dart';
 import '../login/login_screen.dart';
 import '../settings/edit_profile.dart';
 
@@ -248,7 +249,9 @@ class Profile extends StatelessWidget {
                         Padding(
                           padding:  EdgeInsets.only(left: 22, right: 22),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+
+                            },
                             child: Row(
                               children:  [
                                 Icon(Icons.attachment_sharp,color: Colors.grey,

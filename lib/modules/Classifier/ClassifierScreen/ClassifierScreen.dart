@@ -388,8 +388,10 @@ class _ClassifierScreenState
       _loading = false;
       _outputs = output!;
     });
-  } // to classify the image and return the output
+  }
+  // to classify the image and return the output
 
+  //loadModel
   loadModel() async {
     await Tflite.loadModel(
       model: "assets/model.tflite",
